@@ -1,0 +1,88 @@
+@import './base.css';
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Scrollbar general */
+html::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Scrollbar en modo claro (por defecto) */
+html::-webkit-scrollbar-track {
+  background: #d8d8d8;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #1018282c;
+  border-radius: 100px;
+  border: 3px solid #ffe0d0;
+}
+
+/* Scrollbar en modo oscuro */
+html.dark::-webkit-scrollbar-track {
+  background: #101828;
+}
+
+html.dark::-webkit-scrollbar-thumb {
+  background-color: oklch(0.82 0.15 178);
+  border: 3px solid #2b2b2b;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #7b503a;
+  cursor: pointer;
+}
+
+a {
+  color: #2D4335;
+}
+
+html.dark a {
+  color: oklch(0.82 0.15 178);
+}
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --color-osur: #0AFFDA;
+  --color-osur-dark: #2E5345;
+  --color-osur-2: #0AFFDA;
+  --color-osur-2-dark: #2E5345;
+  --color-osur-hover: #09EBC9;
+  --color-osur-dark-hover: #3D7565;
+
+
+  /* Light mode */
+  --color-light: #f4f7fb;
+  --color-light-2: #e4e7eb;
+  --color-light-3: #f4f7fb;
+  --color-primary: #007bff;
+  --color-primary-hover: #fff;
+  --color-pt: #1f2d3d; /* primary text */
+  --color-ptd: #3f4d5d; /* primary text description */
+  --color-subtext: #66788a;
+  --color-pt-dark: #171215; /* primary text dark */
+  --color-pti-dark: #1a1b1a; /* primary text input dark */
+  --color-bot-chat-light: #f7f7f7;
+  --color-user-chat-light: #d8d8d8;
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-accent: #b388ff;
+
+  /* Dark mode */
+  --color-dark: #1a1e24;
+  --color-dark-2: #2a2e34;
+  --color-dark-3: #1a1e24;
+  --color-surface-dark: #2a2f38;
+  --color-primary-dark: #66aaff;
+  --color-pt-light: #f4f7fb; /* primary text light*/
+  --color-ptd-light: #d4d7db; /* primary text desption light */
+  --color-pti-light: #eaebea; /* primary text input light*/
+  --color-bot-chat-dark: #050505;
+  --color-user-chat-dark: #212321;
+  --color-subtext-dark: #a3abb8;
+  --color-hover-dark: #3a3f48;
+}
+
