@@ -72,7 +72,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-light dark:bg-dark">
+  <div class="flex-1 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-light dark:bg-dark">
     <div class="form-card bg-light-2 dark:bg-dark-2 p-8 rounded-lg shadow-md w-full max-w-md">
       <div>
         <h2 class="form-title text-pt dark:text-light text-2xl font-bold mb-2" style="font-family: var(--font-sans);">
