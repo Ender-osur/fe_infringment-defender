@@ -2,6 +2,7 @@ import axios from 'axios'
 
 
 export const apiMultiservice = axios.create({
-  baseURL: 'http://localhost:3123/api/generation',
+  baseURL: 'http://localhost:3123/api',
   timeout: 10000,
 })
+
