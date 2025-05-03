@@ -37,11 +37,13 @@ export const useChat = () => {
         const conversations = res.data.conversations;
         console.log('conversations :: ', conversations);
         conversations.forEach((conversation) => {
-          messages.value.push({
-            id: conversation.id,
-            text: conversation.createdAt,
-            isUser: false,
-            timestamp: new Date(),
+          conversation.messages.forEach((message) => {
+            messages.value.push({
+              id: message.id,
+              text: message.content,
+              isUser: message.reference,
+              timestamp: new Date(message.createdAt),
+            })
           })
         })
       }).catch((error) => {
