@@ -19,7 +19,7 @@ class ConsultService {
         }
 
         const response: AxiosResponse<HistoryResponse> = await apiMultiservice.get(
-            `/api/conversations/history/${currentPage}/${pageSize}`,
+            `/conversations/history/${currentPage}/${pageSize}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
