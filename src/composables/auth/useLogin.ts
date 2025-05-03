@@ -1,19 +1,36 @@
+// composables/useLogin.ts
 import { ref } from 'vue';
-import { AuthService } from '@/services/AuthService';
+import { useRouter } from 'vue-router';
+import AuthService from '@/services/authService';
+import { useI18n } from 'vue-i18n';
 
-export const useLogin = () => {
+export function useLogin() {
   const isLoading = ref(false);
-  const error = ref<string | null>(null);
+  const loginError = ref('');
+  const router = useRouter();
+  const { t } = useI18n();
 
-  const login = async (email: string, password: string) => {
-    isLoading.value = true;
-    error.value = null;
-
+  const login = async ({
+    email,
+    password,
+    rememberMe,
+  }: {
+    email: string;
+    password: string;
+    rememberMe?: boolean;
+  }) => {
+    loginError.value = '';
     try {
-      await AuthService.login({ email, password });
-    } catch (err) {
-      error.value = 'Login failed. Please check your credentials.';
-      console.error('Login error:', err);
+      isLoading.value = true;
+      const response = await AuthService.login({ email, password, rememberMe });
+
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+
+      router.push('/');
+    } catch (error) {
+      console.error('Login error:', error);
+      loginError.value = t('messages.loginFailed');
     } finally {
       isLoading.value = false;
     }
@@ -21,7 +38,7 @@ export const useLogin = () => {
 
   return {
     isLoading,
-    error,
+    loginError,
     login,
   };
-};
+}

@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, helpers } from '@vuelidate/validators';
-import AuthService from '../../services/AuthService';
+import AuthService from '../../services/authService';
 import FormInput from '../../components/FormInput.vue';
 import { useNotification } from '../../composables/useNotification';
 
