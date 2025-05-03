@@ -1,8 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-
-export const apiMultiservice = axios.create({
+export const apiClient = axios.create({
   baseURL: 'http://localhost:3123/api',
   timeout: 10000,
-})
-
+});
