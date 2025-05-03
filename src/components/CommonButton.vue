@@ -3,14 +3,18 @@ import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   text: string;
-  onClick?: () => void;
   styles?: string;
+  path?: string;
 }>();
 
 const router = useRouter();
 
 const handleClick = () => {
-  router.push('/chat');
+  console.log("path", props.path)
+  if (props.path) {
+    router.push(props.path);
+  }
+
 };
 </script>
 

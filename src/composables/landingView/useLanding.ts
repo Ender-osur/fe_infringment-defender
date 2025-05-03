@@ -11,13 +11,8 @@ export const useLanding = () => {
       path: t(`services.list[${index}].path`),
     })),
   );
-
-  const handleClick = () => {
-    console.log('Explorar Traductor');
-  };
-
+  console.log("services: ", services.value)
   return {
     services,
-    handleClick,
   };
 };
