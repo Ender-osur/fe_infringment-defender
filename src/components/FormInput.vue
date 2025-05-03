@@ -54,8 +54,8 @@ const togglePasswordVisibility = () => {
 const hasError = computed(() => props.touched && props.error)
 
 const inputClasses = computed(() => [
-  'form-input dark:text-blue w-full border-1 border-dark dark:border-light rounded-sm',
-  hasError.value ? 'border-error-500 focus:ring-error-500' : 'border-gray-300 dark:border-gray-600'
+  'form-input p-2 text-dark dark:text-light w-full border-1 border-dark dark:border-light rounded-sm',
+  hasError.value ? 'border-error focus:ring-error' : 'border-gray-300 dark:border-gray-600'
 ])
 </script>
 
@@ -95,7 +95,7 @@ const inputClasses = computed(() => [
 
     <!-- Error message -->
     <transition name="fade">
-      <p v-if="hasError" class="error-message">
+      <p v-if="hasError" class="error-message dark:text-subtext-dark text-subtext-2">
         {{ error }}
       </p>
     </transition>

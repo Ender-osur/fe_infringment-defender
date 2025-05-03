@@ -66,7 +66,7 @@ watch(isMobile, (newValue) => {
         <RouterLink to="/home">
           <div class="flex flex-row w-full items-center gap-2 bg-dark dark:bg-light pr-4 rounded-xl">
             <img src="/favicon.webp" alt="icono" height="40px" width="42px" />
-            <span class=" dark:text-osur-dark text-osur font-bold">Multiservice</span>
+            <span class=" dark:text-osur-dark text-osur font-bold">Infringment Defender</span>
           </div>
         </RouterLink>
 

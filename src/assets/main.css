@@ -49,7 +49,7 @@ html.dark a {
   --color-osur: #0AFFDA;
   --color-osur-dark: #2E5345;
   --color-osur-2: #0AFFDA;
-  --color-osur-2-dark: #2E5345;
+  --color-osur-2-dark: #3E6355;
   --color-osur-hover: #09EBC9;
   --color-osur-dark-hover: #3D7565;
 
@@ -63,6 +63,7 @@ html.dark a {
   --color-pt: #1f2d3d; /* primary text */
   --color-ptd: #3f4d5d; /* primary text description */
   --color-subtext: #66788a;
+  --color-subtext-2: #56687a;
   --color-pt-dark: #171215; /* primary text dark */
   --color-pti-dark: #1a1b1a; /* primary text input dark */
   --color-bot-chat-light: #f7f7f7;
@@ -83,6 +84,7 @@ html.dark a {
   --color-bot-chat-dark: #050505;
   --color-user-chat-dark: #212321;
   --color-subtext-dark: #a3abb8;
+  --color-subtext-dark-2: #b3bbc8;
   --color-hover-dark: #3a3f48;
 }
 

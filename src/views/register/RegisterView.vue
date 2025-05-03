@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, helpers, sameAs } from '@vuelidate/validators';
-import AuthService from '../../services/AuthService';
-import FormInput from '../../components/FormInput.vue'
+import AuthService from '../../services/authService';
+import FormInput from '../../components/FormInput.vue';
 import { useNotification } from '../../composables/useNotification';
 
 const { t } = useI18n();
@@ -98,14 +98,18 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-    <div class="form-card">
+  <div class="flex-1 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div class="form-card bg-light-2 dark:bg-dark-2 p-8 rounded-lg shadow-md w-full max-w-md">
       <div>
-        <h2 class="form-title">{{ t('form.register') }}</h2>
-        <p class="form-subtitle">
+        <h2 class="form-title text-pt dark:text-light text-2xl font-bold mb-2">
+          {{ t('form.register') }}
+        </h2>
+        <p class="form-subtitle text-subtext dark:text-subtext-dark text-sm mb-6">
           {{ t('form.alreadyHaveAccount') }}
-          <router-link to="/login" class="text-black hover:text-primary">
-            {{ t('form.signIn') }}
+          <router-link to="/login">
+            <span class="text-osur-dark dark:text-osur hover:text-osur-hover">
+              {{ t('form.signIn') }}
+            </span>
           </router-link>
         </p>
       </div>
@@ -113,7 +117,7 @@ const handleSubmit = async () => {
       <form @submit.prevent="handleSubmit" class="space-y-6">
         <!-- Alert for error -->
         <transition name="fade">
-          <div v-if="registerError" class="p-3 text-sm bg-error-100 text-error-600 rounded-md">
+          <div v-if="registerError" class="p-3 text-sm bg-error text-white rounded-md">
             {{ registerError }}
           </div>
         </transition>
@@ -159,7 +163,11 @@ const handleSubmit = async () => {
         />
 
         <!-- Register button -->
-        <button type="submit" class="btn-primary w-full" :disabled="isLoading">
+        <button
+          type="submit"
+          class="w-full py-2 px-4 border tracking-[2px] border-transparent rounded-md shadow-sm text-sm font-medium cursor-pointer text-white dark:text-black dark:bg-osur bg-osur-dark hover:bg-osur-2-dark hover:dark:bg-osur-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-osur-dark focus:dark:ring-osur disabled:opacity-50 disabled:cursor-not-allowed"
+          :disabled="isLoading"
+        >
           <span v-if="isLoading" class="flex items-center justify-center">
             <svg
               class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
