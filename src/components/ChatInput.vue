@@ -54,6 +54,7 @@ const sendMessage = () => {
 
 const verHistorial = () => {
   console.log('Ver historial');
+  emit('send', "");
 };
 
 const open = ref(false);

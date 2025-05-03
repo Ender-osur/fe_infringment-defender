@@ -4,7 +4,7 @@ import { useChat } from '@/composables/chatView/useChat';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
 
-const { messages, handleSend } = useChat();
+const { messages, handleSend, handleHistory } = useChat();
 </script>
 
 <template>
@@ -36,7 +36,7 @@ const { messages, handleSend } = useChat();
 
     <!-- Chat Input -->
     <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
-      <ChatInput @send="handleSend" />
+      <ChatInput @send="handleHistory" />
     </div>
   </div>
 </template>
