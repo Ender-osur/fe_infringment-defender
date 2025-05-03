@@ -16,6 +16,13 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Language',
     },
+    history: {
+      header: 'Traductor',
+      record: 'see history',
+      userMessage: 'Tú',
+      botMessage: 'Bot',
+      lang: 'Idioma',
+    },
     footer: {
       rights: 'Developed by Osur.dev',
     },
@@ -86,6 +93,14 @@ const messages = {
       header: 'Traductor',
       placeholder: 'Escribe un mensaje...',
       send: 'Enviar',
+      userMessage: 'Tú',
+      botMessage: 'Bot',
+      lang: 'Idioma',
+    },
+    history: {
+      header: 'Traductor',
+      placeholder: 'Escribe un mensaje...',
+      record: 'Ver historial',
       userMessage: 'Tú',
       botMessage: 'Bot',
       lang: 'Idioma',
