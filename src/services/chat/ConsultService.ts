@@ -2,6 +2,7 @@ import { type AxiosResponse } from 'axios'
 import api from '../api/apiClient'
 import type { HistoryResponse } from '@/models/interfaces/chatHistory';
 
+
 class ConsultService {
     async getHistory(): Promise<AxiosResponse<HistoryResponse>> {
 

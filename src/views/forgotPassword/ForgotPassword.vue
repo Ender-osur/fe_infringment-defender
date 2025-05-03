@@ -6,11 +6,9 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, helpers } from '@vuelidate/validators';
 import AuthService from '../../services/authService';
 import FormInput from '../../components/FormInput.vue';
-import { useNotification } from '../../composables/useNotification';
 
 const { t } = useI18n();
 const router = useRouter();
-const { showNotification } = useNotification();
 
 // Form data
 const formData = ref({

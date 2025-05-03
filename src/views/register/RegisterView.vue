@@ -6,11 +6,9 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, helpers, sameAs } from '@vuelidate/validators';
 import AuthService from '../../services/authService';
 import FormInput from '../../components/FormInput.vue';
-import { useNotification } from '../../composables/useNotification';
 
 const { t } = useI18n();
 const router = useRouter();
-const { showNotification } = useNotification();
 
 // Form data
 const formData = ref({
@@ -76,9 +74,6 @@ const handleSubmit = async () => {
       email: formData.value.email,
       password: formData.value.password,
     });
-
-    // Show success notification
-    showNotification(t('messages.registerSuccess'), 'success');
 
     // Redirect to login
     router.push('/login');
