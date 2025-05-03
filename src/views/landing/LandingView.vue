@@ -24,7 +24,7 @@ const { services, handleClick } = useLanding();
         <h2 class="text-3xl font-bold text-center dark:text-osur text-osur-dark mb-8">
           {{ t('services.title') }}
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
+        <div class="flex  gap-8 flex-wrap justify-center">
           <ServiceCard
             v-for="(service, index) in services"
             :key="index"
