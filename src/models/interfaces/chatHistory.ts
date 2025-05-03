@@ -5,7 +5,6 @@ export interface HistoryResponse {
 export interface Conversation {
     id: number;
     createdAt: string;
-    messages: Message[];
 }
 
 export interface Message {

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useChat } from '@/composables/chatView/useChat';
-
+import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
+import RatingModal from '@/components/RatingModal.vue';
+const { isModalOpen, openModal, closeModal, submitRating } = useRating();
 
-const { messages, handleSend, handleHistory} = useChat();
+const { messages, conversationsData, handleSend, handleHistory} = useChat();
 const selectedConversationId = ref<string | null>(null);
 const responseConversation = ref();
 
@@ -33,6 +35,7 @@ const responseConversation = ref([
 ]);*/
 
 onMounted(() => {
+  console.log("monta el componente ...");
   responseConversation.value = handleHistory(); // Load initial conversations
 });
 </script>
@@ -46,12 +49,12 @@ onMounted(() => {
       </header>
       <div class="p-4 space-y-2">
         <div
-          v-for="conversation in responseConversation.value"
+          v-for="conversation in conversationsData"
           :key="conversation.id"
           class="p-2 bg-white dark:bg-gray-700 rounded shadow cursor-pointer"
           @click="selectConversation(conversation.id)"
         >
-          {{ conversation.title }}
+          {{ conversation.text }}
         </div>
       </div>
     </aside>
@@ -92,10 +95,25 @@ onMounted(() => {
 
       <!-- Chat Input -->
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
+        <button
+          @click="openModal"
+          class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
+        >
+          Rate Experience
+        </button>
         <ChatInput @send="handleSend" />
+     
       </div>
     </div>
   </div>
+
+    
+    <!-- Rating Modal -->
+    <RatingModal
+      :is-open="isModalOpen"
+      @close="closeModal"
+      @submit="submitRating"
+    />
 </template>
 
 <style scoped>
