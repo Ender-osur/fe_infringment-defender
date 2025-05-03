@@ -1,5 +1,5 @@
-import axios, { type AxiosResponse } from 'axios'
-import { apiMultiservice } from '../api/apiClient'
+import { type AxiosResponse } from 'axios'
+import api from '../api/apiClient'
 import type { HistoryResponse } from '@/models/interfaces/chatHistory';
 
 class ConsultService {
@@ -18,7 +18,7 @@ class ConsultService {
             localStorage.setItem('pageSize', pageSize);
         }
 
-        const response: AxiosResponse<HistoryResponse> = await apiMultiservice.get(
+        const response: AxiosResponse<HistoryResponse> = await api.get(
             `/conversations/history/${currentPage}/${pageSize}`,
             {
                 headers: {
