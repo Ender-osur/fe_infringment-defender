@@ -7,12 +7,17 @@ import ChatInput from '@/components/ChatInput.vue';
 import RatingModal from '@/components/RatingModal.vue';
 const { isModalOpen, openModal, closeModal, submitRating } = useRating();
 
-const { messages, conversationsData, handleSend, handleHistory} = useChat();
+const { messages, conversationsData, handleSend, handleHistory, handleMessage} = useChat();
 const selectedConversationId = ref<string | null>(null);
 const responseConversation = ref();
 
 const selectConversation = async (id: string) => {
   selectedConversationId.value = id;
+  console.log("selectedConversationId.value :: ", selectedConversationId.value);
+  messages.value = [];
+  handleMessage(id);
+  console.log("conversation id: ", id);
+
 };
 /*/ Array de prueba para simular conversaciones
 const responseConversation = ref([
@@ -99,7 +104,7 @@ onMounted(() => {
           @click="openModal"
           class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
         >
-          Rate Experience
+          End Chat
         </button>
         <ChatInput @send="handleSend" />
      
