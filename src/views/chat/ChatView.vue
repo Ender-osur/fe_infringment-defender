@@ -5,14 +5,14 @@ import { useChat } from '@/composables/chatView/useChat';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
 
-const { messages, handleSend, handleHistory } = useChat();
+const { messages, handleSend, handleHistory} = useChat();
 const selectedConversationId = ref<string | null>(null);
-handleHistory(); // Load initial conversations
+const responseConversation = ref();
 
 const selectConversation = async (id: string) => {
   selectedConversationId.value = id;
 };
-// Array de prueba para simular conversaciones
+/*/ Array de prueba para simular conversaciones
 const responseConversation = ref([
   {
     id: '1',
@@ -30,10 +30,10 @@ const responseConversation = ref([
       { id: 'm4', text: 'Va muy bien, gracias por preguntar.', isUser: false, timestamp: new Date() },
     ],
   },
-]);
+]);*/
 
 onMounted(() => {
-  handleHistory(); // Load initial conversations
+  responseConversation.value = handleHistory(); // Load initial conversations
 });
 </script>
 
@@ -46,7 +46,7 @@ onMounted(() => {
       </header>
       <div class="p-4 space-y-2">
         <div
-          v-for="conversation in responseConversation"
+          v-for="conversation in responseConversation.value"
           :key="conversation.id"
           class="p-2 bg-white dark:bg-gray-700 rounded shadow cursor-pointer"
           @click="selectConversation(conversation.id)"
@@ -81,7 +81,7 @@ onMounted(() => {
       >
         <div class="space-y-2 w-full">
           <ChatMessages
-            v-for="message in responseConversation.find(c => c.id === selectedConversationId)?.messages || []"
+            v-for="message in messages"
             :key="message.id"
             :message="message.text"
             :is-user="message.isUser"
