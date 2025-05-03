@@ -7,7 +7,7 @@ import ChatInput from '@/components/ChatInput.vue';
 import RatingModal from '@/components/RatingModal.vue';
 const { isModalOpen, openModal, closeModal, submitRating } = useRating();
 
-const { messages, handleSend, handleHistory} = useChat();
+const { messages, conversationsData, handleSend, handleHistory} = useChat();
 const selectedConversationId = ref<string | null>(null);
 const responseConversation = ref();
 
@@ -35,6 +35,7 @@ const responseConversation = ref([
 ]);*/
 
 onMounted(() => {
+  console.log("monta el componente ...");
   responseConversation.value = handleHistory(); // Load initial conversations
 });
 </script>
@@ -48,12 +49,12 @@ onMounted(() => {
       </header>
       <div class="p-4 space-y-2">
         <div
-          v-for="conversation in responseConversation.value"
+          v-for="conversation in conversationsData"
           :key="conversation.id"
           class="p-2 bg-white dark:bg-gray-700 rounded shadow cursor-pointer"
           @click="selectConversation(conversation.id)"
         >
-          {{ conversation.title }}
+          {{ conversation.text }}
         </div>
       </div>
     </aside>

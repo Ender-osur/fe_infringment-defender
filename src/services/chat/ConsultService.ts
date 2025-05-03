@@ -1,11 +1,11 @@
 import { type AxiosResponse } from 'axios'
 import api from '../api/apiClient'
-import type { HistoryResponse } from '@/models/interfaces/chatHistory';
+import type { Conversation } from '@/models/interfaces/chatHistory';
 
 
 class ConsultService {
-    async getHistory(): Promise<AxiosResponse<HistoryResponse>> {
-
+    async getHistory(): Promise<AxiosResponse<Conversation[]>> {
+        console.log("vamos a consumir");
         // si existe la paginacion, la guardo en el local storage
          let currentPage = localStorage.getItem('currentPage');
          let pageSize = localStorage.getItem('pageSize');
@@ -19,7 +19,7 @@ class ConsultService {
             localStorage.setItem('pageSize', pageSize);
         }
 
-        const response: AxiosResponse<HistoryResponse> = await api.get(
+        const response: AxiosResponse<Conversation[]> = await api.get(
             `/conversations/history`,
             {
                 headers: {
@@ -28,7 +28,7 @@ class ConsultService {
                 },
             },
         )
-        console.log('response :: ', response);
+        console.log('response in service :: ', response);
         return response;
     }
 }

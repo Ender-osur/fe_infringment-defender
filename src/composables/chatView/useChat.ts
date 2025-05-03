@@ -9,12 +9,26 @@ export interface Message {
   timestamp: Date
 }
 
+export interface Conversation {
+  id: number
+  text: string
+  timestamp: Date
+}
+
 export const useChat = () => {
   const messages = ref<Message[]>([
     {
       id: 1,
       text: '¡Hola! ¿Cómo puedo ayudarte?',
       isUser: false,
+      timestamp: new Date(),
+    },
+  ])
+
+  const conversationsData = ref<Conversation[]>([
+    {
+      id: 1,
+      text: '',
       timestamp: new Date(),
     },
   ])
@@ -30,26 +44,25 @@ export const useChat = () => {
   }
 
   const handleHistory = async () => {
-
+    
       const responseConversation = consultService.getHistory();
       console.log('response :: ', responseConversation);
       responseConversation.then((res) => {
-        console.log('res :: ', res);
-        const conversations = res.data.conversations;
+        console.log('res solo :: ', res);
+        const conversations = res.data;
         console.log('conversations :: ', conversations);
         conversations.forEach((conversation) => {
-          conversation.messages.forEach((message) => {
-            messages.value.unshift({
-              id: message.id,
-              text: message.content,
-              isUser: message.reference === "true",
-              timestamp: new Date(message.createdAt),
+          //conversation.messages.forEach((message) => {
+            conversationsData.value.push({
+              id: conversation.id,
+              text: "Conversation "+ conversation.id,
+              timestamp: new Date(),
             })
-          })
+          //})
         })
         return responseConversation;
       }).catch((error) => {
-        console.error('Error fetching history:', error)
+        console.log('Error fetching history :: ', error)
       })
   }
 
@@ -57,5 +70,6 @@ export const useChat = () => {
     messages,
     handleSend,
     handleHistory,
+    conversationsData,
   }
 }
