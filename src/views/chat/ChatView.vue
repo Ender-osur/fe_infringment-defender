@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useChat } from '@/composables/chatView/useChat';
-
+import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
+import RatingModal from '@/components/RatingModal.vue';
+const { isModalOpen, openModal, closeModal, submitRating } = useRating();
 
 const { messages, handleSend, handleHistory } = useChat();
 const selectedConversationId = ref<string | null>(null);
@@ -81,7 +83,7 @@ onMounted(() => {
       >
         <div class="space-y-2 w-full">
           <ChatMessages
-            v-for="message in responseConversation.find(c => c.id === selectedConversationId)?.messages || []"
+            v-for="message in messages"
             :key="message.id"
             :message="message.text"
             :is-user="message.isUser"
@@ -92,10 +94,25 @@ onMounted(() => {
 
       <!-- Chat Input -->
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
+        <button
+          @click="openModal"
+          class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
+        >
+          Rate Experience
+        </button>
         <ChatInput @send="handleSend" />
+     
       </div>
     </div>
   </div>
+
+    
+    <!-- Rating Modal -->
+    <RatingModal
+      :is-open="isModalOpen"
+      @close="closeModal"
+      @submit="submitRating"
+    />
 </template>
 
 <style scoped>
