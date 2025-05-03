@@ -11,6 +11,6 @@ export interface Conversation {
 export interface Message {
     id: number;
     content: string;
-    reference: boolean;
+    reference: string;
     createdAt: string;
 }

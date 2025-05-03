@@ -41,7 +41,7 @@ export const useChat = () => {
             messages.value.push({
               id: message.id,
               text: message.content,
-              isUser: message.reference,
+              isUser: message.reference === "true",
               timestamp: new Date(message.createdAt),
             })
           })
