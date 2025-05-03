@@ -1,6 +1,7 @@
-import axios, { type AxiosResponse } from 'axios'
+import { type AxiosResponse } from 'axios'
+import api from '../api/apiClient'
 import type { HistoryResponse } from '@/models/interfaces/chatHistory';
-import api from '../api/apiClient';
+
 
 class ConsultService {
     async getHistory(): Promise<AxiosResponse<HistoryResponse>> {

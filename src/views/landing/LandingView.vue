@@ -5,7 +5,7 @@ import ServiceCard from '@/components/ServiceCard.vue';
 import { useLanding } from '@/composables/landingView/useLanding';
 
 const { t } = useI18n();
-const { services, handleClick } = useLanding();
+const { services } = useLanding();
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const { services, handleClick } = useLanding();
             :title="service.title"
             :description="service.description"
             :buttonText="service.button"
-            :onClick="handleClick"
+            :path="service.path"
           />
         </div>
       </div>

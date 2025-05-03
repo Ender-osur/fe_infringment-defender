@@ -5,7 +5,6 @@ defineProps<{
   title: string;
   description: string;
   buttonText: string;
-  onClick?: () => void;
   path?: string;
   buttonClass?: string;
 }>();
@@ -17,6 +16,6 @@ defineProps<{
   >
     <h3 class="text-xl font-bold dark:text-osur text-osur-dark text-center">{{ title }}</h3>
     <p class="text-ptd dark:text-ptd-light text-center">{{ description }}</p>
-    <CommonButton :text="buttonText" :onClick="onClick" :class="buttonClass" />
+    <CommonButton :text="buttonText" :path="path" :styles="buttonClass" />
   </div>
 </template>
