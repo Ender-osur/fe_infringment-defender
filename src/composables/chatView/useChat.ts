@@ -1,5 +1,6 @@
 import { consultService } from '@/services/chat/ConsultService'
 import { ref } from 'vue'
+import { useConversation } from './useConversation'
 
 export interface Message {
   id: number
@@ -28,11 +29,11 @@ export const useChat = () => {
     })
   }
 
-  const handleHistory = () => {
+  const handleHistory = async () => {
 
-      const response = consultService.getHistory();
-      console.log('response :: ', response);
-      response.then((res) => {
+      const responseConversation = consultService.getHistory();
+      console.log('response :: ', responseConversation);
+      responseConversation.then((res) => {
         console.log('res :: ', res);
         const conversations = res.data.conversations;
         console.log('conversations :: ', conversations);
@@ -46,6 +47,7 @@ export const useChat = () => {
             })
           })
         })
+        return responseConversation;
       }).catch((error) => {
         console.error('Error fetching history:', error)
       })

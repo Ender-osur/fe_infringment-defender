@@ -140,13 +140,6 @@ onBeforeUnmount(() => {
       >
         {{ t('chat.send') }}
       </button>
-      <!-- Botón enviar -->
-      <button
-        @click="verHistorial"
-        class="border-2 border-l-0 border-osur transition-color active:opacity-80 duration-50 w-20 h-full max-h-12 px-3 rounded-r-lg font-bold tracking-wide cursor-pointer bg-osur-dark text-osur dark:bg-osur dark:text-osur-dark hover:opacity-70"
-      >
-        {{ t('history.record') }}
-      </button>
     </div>
   </div>
 </template>
