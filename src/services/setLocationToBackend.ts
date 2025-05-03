@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { apiClient } from './api/apiClient';
+import api from './api/apiClient';
 
 export const sendLocationToBackend = async (latitude: number, longitude: number) => {
   try {
-    const response = await axios.post(`${apiClient}/`, {
+    const response = await axios.post(`${api}/`, {
       latitude,
       longitude,
     });
