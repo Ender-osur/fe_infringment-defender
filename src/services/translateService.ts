@@ -1,7 +1,8 @@
 import axios, { type AxiosResponse, type AxiosError, type CancelTokenSource } from 'axios';
 import { type Message } from '../models/interfaces/translate';
 import { type TranslationResponse } from '../models/interfaces/translationResponse';
-import { apiMultiservice } from './api/apiClient';
+import api from './api/apiClient';
+
 
 let cancelTokenSource: CancelTokenSource;
 
@@ -15,7 +16,7 @@ export const translateService = {
 
     try {
       cancelTokenSource = axios.CancelToken.source();
-      const response: AxiosResponse<TranslationResponse> = await apiMultiservice.post(
+      const response: AxiosResponse<TranslationResponse> = await api.post(
         '/translate',
         message,
         {
