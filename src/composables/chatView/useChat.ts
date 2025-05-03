@@ -1,6 +1,6 @@
 import { consultService } from '@/services/chat/ConsultService'
+import { messageService } from '@/services/messages/MessageService'
 import { ref } from 'vue'
-import { useConversation } from './useConversation'
 
 export interface Message {
   id: number
@@ -66,10 +66,40 @@ export const useChat = () => {
       })
   }
 
+
+
+  const handleMessage = (conversationId: number) => {
+    console.log("el id de la conversacion es :: ", conversationId);
+
+const response = messageService.getMessagesByUser(conversationId);
+    console.log('response :: ', response);
+    response.then((res) => {
+      console.log('res :: ', res);
+      const messagesData = res.data;
+      console.log('messagesData :: ', messagesData);
+
+
+      messagesData.forEach((message) => {
+          messages.value.unshift({
+            id: message.id,
+            text: message.content,
+            isUser: message.reference === "true",
+            timestamp: new Date(message.createdAt),
+          })
+        })
+      
+    }).catch((error) => {
+      console.error('Error fetching messages:', error)
+    })
+}
+
+
+
   return {
     messages,
     handleSend,
     handleHistory,
     conversationsData,
+    handleMessage
   }
 }
