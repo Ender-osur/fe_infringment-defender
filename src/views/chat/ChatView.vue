@@ -4,7 +4,7 @@ import { useChat } from '@/composables/chatView/useChat';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
 
-const { messages, handleSend } = useChat();
+const { messages, handleSend, handleHistory } = useChat();
 </script>
 
 <template>
@@ -22,7 +22,13 @@ const { messages, handleSend } = useChat();
     </header>
 
     <!-- Chat Messages -->
-    <main class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto">
+    <main class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto"
+    @scroll="(e) => {
+        if (e.target.scrollTop === 0) {
+          handleHistory();
+        }
+      }"
+>
       <div class="space-y-2 w-full">
         <ChatMessages
           v-for="message in messages"

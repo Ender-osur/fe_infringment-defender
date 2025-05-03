@@ -1,3 +1,4 @@
+import { consultService } from '@/services/chat/ConsultService'
 import { ref } from 'vue'
 
 export interface Message {
@@ -27,8 +28,32 @@ export const useChat = () => {
     })
   }
 
+  const handleHistory = () => {
+
+      const response = consultService.getHistory();
+      console.log('response :: ', response);
+      response.then((res) => {
+        console.log('res :: ', res);
+        const conversations = res.data.conversations;
+        console.log('conversations :: ', conversations);
+        conversations.forEach((conversation) => {
+          conversation.messages.forEach((message) => {
+            messages.value.unshift({
+              id: message.id,
+              text: message.content,
+              isUser: message.reference === "true",
+              timestamp: new Date(message.createdAt),
+            })
+          })
+        })
+      }).catch((error) => {
+        console.error('Error fetching history:', error)
+      })
+  }
+
   return {
     messages,
     handleSend,
+    handleHistory,
   }
 }
