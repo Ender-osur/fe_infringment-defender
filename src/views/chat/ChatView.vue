@@ -22,7 +22,13 @@ const { messages, handleSend, handleHistory } = useChat();
     </header>
 
     <!-- Chat Messages -->
-    <main class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto">
+    <main class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto"
+    @scroll="(e) => {
+        if (e.target.scrollTop === 0) {
+          handleHistory();
+        }
+      }"
+>
       <div class="space-y-2 w-full">
         <ChatMessages
           v-for="message in messages"
@@ -36,7 +42,7 @@ const { messages, handleSend, handleHistory } = useChat();
 
     <!-- Chat Input -->
     <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
-      <ChatInput @send="handleHistory" />
+      <ChatInput @send="handleSend" />
     </div>
   </div>
 </template>

@@ -38,7 +38,7 @@ export const useChat = () => {
         console.log('conversations :: ', conversations);
         conversations.forEach((conversation) => {
           conversation.messages.forEach((message) => {
-            messages.value.push({
+            messages.value.unshift({
               id: message.id,
               text: message.content,
               isUser: message.reference === "true",
