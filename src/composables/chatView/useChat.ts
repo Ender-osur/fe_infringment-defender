@@ -1,5 +1,5 @@
 import { consultService } from '@/services/chat/ConsultService'
-import { messageService, type Message as ApiMessage } from '@/services/messages/MessageService'
+import { messageService } from '@/services/messages/MessageService'
 import { AssistantService } from '@/services/assistant/AssistantService'
 import { ConversationService } from '@/services/chat/conversationService'
 import { ref } from 'vue'
@@ -219,7 +219,7 @@ export const useChat = () => {
       console.log('messagesData :: ', messagesData);
 
 
-      messagesData.forEach((message: ApiMessage) => {
+      messagesData.result.forEach((message) => {
           messages.value.unshift({
             id: message.id,
             text: message.content,
