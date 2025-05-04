@@ -199,12 +199,14 @@ export const useChat = () => {
 
   const handleMessage = (conversationId: number) => {
     console.log("el id de la conversación es :: ", conversationId);
-
-const response = messageService.getMessagesByUser(conversationId);
+    conversationId = conversationId === undefined ? selectedConversationId.value: conversationId;
+    console.log("el id de la conversación despueds es :: ", conversationId);
+    
+    const response = messageService.getMessagesByUser(conversationId);
     console.log('response :: ', response);
     response.then((res) => {
       console.log('res :: ', res);
-      const messagesData = res.data;
+      const messagesData = res.data.result;
       console.log('messagesData :: ', messagesData);
 
 

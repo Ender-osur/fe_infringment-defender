@@ -12,12 +12,13 @@ const { messages, conversationsData, handleSend, handleHistory, handleMessage, s
 const responseConversation = ref();
 
 const selectConversation = async (id: string | number) => {
+  localStorage.removeItem('currentPage');
+  //.getItem('currentPage');
   selectedConversationId.value = Number(id);
   console.log("selectedConversationId.value :: ", selectedConversationId.value);
   messages.value = [];
   handleMessage(Number(id));
   console.log("conversation id: ", id);
-
 };
 
 onMounted(async () => {
@@ -66,7 +67,7 @@ onMounted(async () => {
         @scroll="(e: Event) => {
           const target = e.target as HTMLElement;
           if (target && target.scrollTop === 0) {
-            handleHistory();
+            handleMessage(selectedConversationId.value);
           }
         }"
       >
