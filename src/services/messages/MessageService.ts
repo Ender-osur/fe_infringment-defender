@@ -32,7 +32,7 @@ class MessageService {
                 },
             },
         )
-        console.log('response in service message :: ', response.data.result);
+        console.log('response in service message :: ', response.data);
         return response;
     }
 }

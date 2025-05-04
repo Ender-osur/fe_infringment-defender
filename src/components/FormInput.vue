@@ -37,7 +37,7 @@ const updateValue = (event: Event) => {
   emit('update:modelValue', (event.target as HTMLInputElement).value)
 }
 
-const handleBlur = (event: FocusEvent) => {
+const handleBlur = (event: Event) => {
   focused.value = false
   emit('blur', event)
 }
