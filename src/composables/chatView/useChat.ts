@@ -1,5 +1,6 @@
 import { consultService } from '@/services/chat/ConsultService'
 import { messageService } from '@/services/messages/MessageService'
+import { AssistantService } from '@/services/assistant/AssistantService'
 import { ref } from 'vue'
 
 export interface Message {
@@ -33,14 +34,57 @@ export const useChat = () => {
     },
   ])
 
-  const handleSend = (text: string) => {
+  const selectedConversationId = ref<number | null>(null);
+
+  const handleSend = async (text: string) => {
     console.log('Mensaje enviado:', text)
+    
+    // Agregar mensaje del usuario al chat
+    const userMessageId = Date.now();
     messages.value.push({
-      id: Date.now(),
+      id: userMessageId,
       text,
       isUser: true,
       timestamp: new Date(),
     })
+    
+    // Obtener el ID de la conversación actual
+    const currentConversationId = selectedConversationId.value || conversationsData.value[0]?.id;
+    
+    if (!currentConversationId) {
+      console.error('No hay una conversación seleccionada');
+      return;
+    }
+    
+    try {
+      console.log('Enviando mensaje al asistente con conversationId:', currentConversationId);
+      
+      // Usar directamente el endpoint principal
+      const response = await AssistantService.sendMessage({
+        conversationId: Number(currentConversationId),
+        reqLanguage: localStorage.getItem('language') || 'es',
+        reqText: text
+      });
+      
+      console.log('Respuesta recibida del asistente:', response);
+      
+      // Agregar respuesta del asistente al chat
+      messages.value.push({
+        id: Date.now(),
+        text: response.result,
+        isUser: false,
+        timestamp: new Date(),
+      });
+    } catch (error) {
+      console.error('Error al enviar mensaje al asistente:', error);
+      // Mostrar mensaje de error en el chat
+      messages.value.push({
+        id: Date.now(),
+        text: 'Lo siento, ha ocurrido un error al procesar tu mensaje.',
+        isUser: false,
+        timestamp: new Date(),
+      });
+    }
   }
 
   const handleHistory = async () => {
@@ -100,6 +144,7 @@ const response = messageService.getMessagesByUser(conversationId);
     handleSend,
     handleHistory,
     conversationsData,
-    handleMessage
+    handleMessage,
+    selectedConversationId
   }
 }
