@@ -70,7 +70,7 @@ onMounted(async () => {
         @scroll="(e: Event) => {
           const target = e.target as HTMLElement;
           if (target && target.scrollTop === 0) {
-            handleMessage(selectedConversationId.value);
+            handleMessage(currentConversationId);
           }
         }"
       >

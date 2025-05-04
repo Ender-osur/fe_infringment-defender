@@ -1,5 +1,5 @@
 import { consultService } from '@/services/chat/ConsultService'
-import { messageService } from '@/services/messages/MessageService'
+import { messageService, type Message as ApiMessage } from '@/services/messages/MessageService'
 import { AssistantService } from '@/services/assistant/AssistantService'
 import { ConversationService } from '@/services/chat/conversationService'
 import { ref } from 'vue'
@@ -197,20 +197,29 @@ export const useChat = () => {
 
 
 
-  const handleMessage = (conversationId: number) => {
+  const handleMessage = (conversationId: number | null) => {
     console.log("el id de la conversación es :: ", conversationId);
-    conversationId = conversationId === undefined ? selectedConversationId.value: conversationId;
-    console.log("el id de la conversación despueds es :: ", conversationId);
+    // Si conversationId es undefined o null, usar selectedConversationId.value
+    const actualConversationId = conversationId ?? selectedConversationId.value;
     
-    const response = messageService.getMessagesByUser(conversationId);
+    // Verificar que tengamos un ID de conversación válido
+    if (actualConversationId === null) {
+      console.error("No hay ID de conversación disponible");
+      return;
+    }
+    
+    console.log("el id de la conversación después es :: ", actualConversationId);
+    
+    const response = messageService.getMessagesByUser(actualConversationId);
     console.log('response :: ', response);
     response.then((res) => {
       console.log('res :: ', res);
-      const messagesData = res.data.result;
+      // Acceder directamente a res.data ya que es de tipo Message[]
+      const messagesData = res.data;
       console.log('messagesData :: ', messagesData);
 
 
-      messagesData.forEach((message) => {
+      messagesData.forEach((message: ApiMessage) => {
           messages.value.unshift({
             id: message.id,
             text: message.content,
@@ -223,7 +232,6 @@ export const useChat = () => {
       console.error('Error fetching messages:', error)
     })
 }
-
 
 
   return {
