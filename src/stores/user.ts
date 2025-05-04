@@ -6,7 +6,7 @@ export const useUserStore = defineStore('user', () => {
   const isAuthenticated = ref(false);
   const conversationsId = ref<string | null>(null);
 
-  function setUser({ id }: { id: string | number }) {
+  function login({ id }: { id: string | number }) {
     userId.value = String(id);
     isAuthenticated.value = true;
   }
@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', () => {
     userId,
     isAuthenticated,
     conversationsId,
-    setUser,
+    setUser: login,
     logout,
   };
 });

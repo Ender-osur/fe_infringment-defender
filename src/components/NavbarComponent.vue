@@ -3,12 +3,17 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useDark, useToggle } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 
+import { useUserStore } from '@/stores/user';
+import AuthService from '@/services/authService';
+
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
 const isLangMenuOpen = ref(false);
 const scrollY = ref(0);
 const isMobile = ref(window.innerWidth < 700);
+const userStore = useUserStore();
+const isAuth = ref(true);
 
 // Internationalization
 const { locale, availableLocales } = useI18n();
@@ -39,6 +44,11 @@ const handleResize = () => {
   isMobile.value = window.innerWidth < 700;
 };
 
+const logout = () => {
+  AuthService.logout()
+}
+
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('resize', handleResize);
@@ -51,8 +61,20 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
 
-watch(isMobile, (newValue) => {
-  console.log('isMobile cambiado:', newValue);
+onMounted(() => {
+  if(!userStore.isAuthenticated) {
+    isAuth.value = true;
+  } else {
+    isAuth.value = false;
+  }
+})
+
+watch(() => userStore.isAuthenticated, () => {
+  if(userStore.isAuthenticated) {
+    isAuth.value = true;
+  } else {
+    isAuth.value = false;
+  }
 });
 </script>
 
@@ -149,6 +171,13 @@ watch(isMobile, (newValue) => {
                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
               />
             </svg>
+          </button>
+          <button
+            v-if="isAuth"
+            @click="logout"
+            class="p-2 rounded-lg hover:bg-primary-hover dark:hover:bg-gray-800 transition-colors cursor-pointer"
+          >
+            Logout
           </button>
         </div>
       </div>

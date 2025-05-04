@@ -55,10 +55,11 @@ const AuthService = {
     await api.post('/auth/forgot-password', { email });
   },
 
-  async logout({ email, password }: Partial<LoginParams>): Promise<void> {
+  async logout(): Promise<void> {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-    await api.post('/auth/logout', { email, password });
+    console.log("LLEGÓ AQUÍ");
+    await api.post('/auth/logout');
   },
 };
 
