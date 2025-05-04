@@ -3,7 +3,7 @@ import api from "../api/apiClient";
 export interface RatingData {
     qualification: number;
     comment: string;
-    conversationId: string;
+    conversationId: number;
 }
 export const ratingService = {
   async submitRating(data: RatingData): Promise<void> {

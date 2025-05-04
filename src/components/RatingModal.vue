@@ -4,6 +4,7 @@ import FormInput from './FormInput.vue';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   isOpen: boolean;
+  conversationId: number | null;
 }>();
 const emit = defineEmits(['close', 'submit']);
 const qualification = ref(0);

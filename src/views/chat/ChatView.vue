@@ -7,7 +7,7 @@ import ChatInput from '@/components/ChatInput.vue';
 import RatingModal from '@/components/RatingModal.vue';
 import { ConversationService } from '@/services/chat/conversationService';
 
-const { isModalOpen, openModal, closeModal, submitRating } = useRating();
+const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = useRating();
 
 const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId} = useChat();
 const responseConversation = ref();
@@ -104,7 +104,10 @@ onMounted(async () => {
       <!-- Chat Input -->
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
         <button
-          @click="openModal"
+        @click="() => {
+            setConversationId(selectedConversationId);
+            openModal();
+          }"
           class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
         >
           End Chat
