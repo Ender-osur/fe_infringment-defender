@@ -10,10 +10,21 @@ export interface Message{
 }
 
 class MessageService {
+    
 
     async getMessagesByUser(conversationId: number): Promise<AxiosResponse<Message[]>> {
+        let currentPage = localStorage.getItem('currentPage');
+        const limit  = import.meta.env.VITE_APP_LIMIT || '10';
+
+        console.log("limit is :: ", limit);
+        if (currentPage) {
+            localStorage.setItem('currentPage', (parseInt(currentPage)+1).toString());
+         }else {
+            currentPage = '1';
+            localStorage.setItem('currentPage', (parseInt(currentPage)+1).toString());
+        }
         const response: AxiosResponse<Message[]> = await api.get(
-            `/conversations/messages/${conversationId}`,
+            `/conversations/messages/pagination?id=${conversationId}&page=${currentPage}&limit=${limit}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,7 +32,7 @@ class MessageService {
                 },
             },
         )
-        console.log('response in service message :: ', response);
+        console.log('response in service message :: ', response.data.result);
         return response;
     }
 }

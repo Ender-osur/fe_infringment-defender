@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
-import AuthService from '@/services/authService';
+import AuthService from '@/services/AuthService';
 import { useAuthStore } from '@/stores/user';
 import { decodeToken } from '../useJWT';
 
@@ -41,7 +41,7 @@ export function useLogin() {
         // Crear un objeto de usuario básico con la información del token
         const userInfo = {
           id: decodedToken.userId,
-          email: decodedToken.email || email
+          email: decodedToken.email || email,
         };
 
         // Guardar la información del usuario en localStorage

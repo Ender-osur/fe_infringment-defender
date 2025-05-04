@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 import { useAuthStore } from '@/stores/user';
-import AuthService from '@/services/authService';
+import AuthService from '@/services/AuthService';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
