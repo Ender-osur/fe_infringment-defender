@@ -33,11 +33,11 @@ const emit = defineEmits(['update:modelValue', 'blur'])
 const focused = ref(false)
 const passwordVisible = ref(false)
 
-const updateValue = (event) => {
-  emit('update:modelValue', event.target.value)
+const updateValue = (event: Event) => {
+  emit('update:modelValue', (event.target as HTMLInputElement).value)
 }
 
-const handleBlur = (event) => {
+const handleBlur = (event: FocusEvent) => {
   focused.value = false
   emit('blur', event)
 }
