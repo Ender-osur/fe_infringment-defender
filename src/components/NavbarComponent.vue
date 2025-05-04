@@ -61,7 +61,7 @@ onUnmounted(() => {
 });
 
 onMounted(() => {
-  if (!userStore.isAuthenticated) {
+  if (userStore.isAuthenticated) {
     isAuth.value = true;
   } else {
     isAuth.value = false;
