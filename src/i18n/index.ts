@@ -48,7 +48,8 @@ const messages = {
     forum: {
       title: 'Title',
       comment: 'Commentary',
-      noPosts: "There are no posts in the forum yet"
+      noPosts: "There are no posts in the forum yet",
+      create: "Create question"
     },
     form: {
       name: 'Name',
@@ -134,7 +135,8 @@ const messages = {
     forum: {
       title: 'Título',
       comment: 'Comentario',
-      noPosts: "No hay publicaciones en el foro todavía"
+      noPosts: "No hay publicaciones en el foro todavía",
+      create: "Crear pregunta"
     },
     form: {
       name: 'Nombre',
@@ -171,10 +173,10 @@ const messages = {
         'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
       fillRequiredFields: 'Por favor, rellena correctamente todos los campos obligatorios',
     },
-  },
-  common: {
-    send: 'Enviar',
-    cancel: 'Cancelar',
+    common: {
+      send: 'Enviar',
+      cancel: 'Cancelar',
+    },
   },
 };
 
