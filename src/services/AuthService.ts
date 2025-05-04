@@ -56,10 +56,19 @@ const AuthService = {
   },
 
   async logout(): Promise<void> {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
-    console.log("LLEGÓ AQUÍ");
-    await api.post('/auth/logout');
+    try {
+      // Primero hacer la petición al servidor con el token aún disponible
+      await api.post('/auth/logout');
+      console.log("Logout exitoso en el servidor");
+    } catch (error) {
+      console.error("Error al hacer logout en el servidor:", error);
+      // Continuar con el proceso de logout local incluso si falla en el servidor
+    } finally {
+      // Luego eliminar los tokens localmente
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
   },
 };
 
