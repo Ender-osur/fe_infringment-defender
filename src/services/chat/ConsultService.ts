@@ -1,10 +1,11 @@
-import axios, { type AxiosResponse } from 'axios'
-import { apiMultiservice } from '../api/apiClient'
-import type { HistoryResponse } from '@/models/interfaces/chatHistory';
+import { type AxiosResponse } from 'axios'
+import api from '../api/apiClient'
+import type { Conversation } from '@/models/interfaces/chatHistory';
+
 
 class ConsultService {
-    async getHistory(): Promise<AxiosResponse<HistoryResponse>> {
-
+    async getHistory(): Promise<AxiosResponse<Conversation[]>> {
+        console.log("vamos a consumir");
         // si existe la paginacion, la guardo en el local storage
          let currentPage = localStorage.getItem('currentPage');
          let pageSize = localStorage.getItem('pageSize');
@@ -18,8 +19,8 @@ class ConsultService {
             localStorage.setItem('pageSize', pageSize);
         }
 
-        const response: AxiosResponse<HistoryResponse> = await apiMultiservice.get(
-            `/conversations/history/${currentPage}/${pageSize}`,
+        const response: AxiosResponse<Conversation[]> = await api.get(
+            `/conversations/history`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,7 +28,7 @@ class ConsultService {
                 },
             },
         )
-        console.log('response :: ', response);
+        console.log('response in service :: ', response);
         return response;
     }
 }

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '@/stores/user';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +30,7 @@ const router = createRouter({
       path: '/register',
       name: 'Register',
       component: () => import('../views/register/RegisterView.vue'),
-      meta: { requiresAuth: false }
+      meta: { requiresAuth: false },
     },
     {
       path: '/chat',
@@ -47,12 +48,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = !!localStorage.getItem('token');
-  next();
+  const authStore = useAuthStore();
 
- if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login');
-  } else if ((to.path === '/login' || to.path === '/register') && isAuthenticated) {
+  } else if ((to.path === '/login' || to.path === '/register') && authStore.isAuthenticated) {
     next('/home');
   } else {
     next();

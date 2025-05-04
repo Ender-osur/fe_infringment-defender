@@ -41,22 +41,25 @@ const AuthService = {
     return response.data;
   },
 
-  async register(params: RegisterParams): Promise<void> {
-    await api.post('/auth/register', {
+  async register(params: RegisterParams): Promise<AuthResponse> {
+    console.log("register user servcice ...");
+    const response = await api.post<AuthResponse>('/auth/register', {
       fullName: params.name,
       email: params.email,
       password: params.password,
     });
+    return response.data;
   },
 
   async forgotPassword(email: string): Promise<void> {
     await api.post('/auth/forgot-password', { email });
   },
 
-  async logout({ email, password }: Partial<LoginParams>): Promise<void> {
+  async logout(): Promise<void> {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-    await api.post('/auth/logout', { email, password });
+    console.log("LLEGÓ AQUÍ");
+    await api.post('/auth/logout');
   },
 };
 

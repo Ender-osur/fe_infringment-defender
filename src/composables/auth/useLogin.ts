@@ -1,14 +1,16 @@
 // composables/useLogin.ts
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import AuthService from '@/services/authService';
 import { useI18n } from 'vue-i18n';
+import AuthService from '@/services/authService';
+import { useAuthStore } from '@/stores/user';
 
 export function useLogin() {
   const isLoading = ref(false);
   const loginError = ref('');
   const router = useRouter();
   const { t } = useI18n();
+  const userStore = useAuthStore();
 
   const login = async ({
     email,
@@ -26,6 +28,7 @@ export function useLogin() {
 
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
+      userStore.setUser({ id: response.user.id });
 
       router.push('/');
     } catch (error) {

@@ -3,10 +3,7 @@ import { createI18n } from 'vue-i18n';
 const messages = {
   en: {
     nav: {
-      chat: 'Chat',
-      imagesGeneration: 'Images Generation',
-      github: 'GitHub',
-      aboutUs: 'About Us',
+      loguot:"Logout"
     },
     chat: {
       header: 'Translater',
@@ -27,24 +24,24 @@ const messages = {
       rights: 'Developed by Osur.dev',
     },
     services: {
-      title: 'Our Legal Services',
-      heroTitle: 'AI-Powered Legal Advice for Drivers',
+      title: 'Our services',
+      heroTitle: 'AI-Powered legal advice for drivers',
       heroDescription:
         'Get fast, reliable legal information related to traffic laws and violations.',
       list: [
         {
-          title: 'Traffic Law Assistance',
+          title: 'Traffic law assistance',
           description:
             'Ask questions related to traffic laws, rights, and violations. Get immediate legal advice.',
           button: 'Get Advice',
           path: '/chat',
         },
         {
-          title: 'Coming Soon',
+          title: 'Forum',
           description:
-            'We are working on new features for even better legal assistance. Stay tuned!',
-          button: 'More Information',
-          path: '/chat',
+            'You will be able to ask different questions asked by different users that have already been answered.',
+          button: 'Forum',
+          path: '/foro',
         },
       ],
     },
@@ -84,10 +81,7 @@ const messages = {
   },
   es: {
     nav: {
-      chat: 'Chat',
-      imagesGeneration: 'Generación de Imágenes',
-      github: 'GitHub',
-      aboutUs: 'Sobre Nosotros',
+      loguot:"Salir"
     },
     chat: {
       header: 'Traductor',
@@ -109,61 +103,60 @@ const messages = {
       rights: 'Desarrollador por Osur.dev',
     },
     services: {
-      title: 'Nuestros Servicios Legales',
-      heroTitle: 'Asesoría Legal Impulsada por IA para Conductores',
+      title: 'Nuestros servicios',
+      heroTitle: 'Asesoría legal impulsada por IA para conductores',
       heroDescription:
         'Obtén información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
       list: [
         {
-          title: 'Asistencia en Ley de Tránsito',
+          title: 'Asistencia en ley de tránsito',
           description:
-            'Haz preguntas relacionadas con las leyes de tránsito, tus derechos y violaciones. Recibe asesoría legal inmediata.',
-          button: 'Obtener Asesoría',
+            'Experimenta',
           path: '/chat',
         },
         {
-          title: 'Próximos Servicios',
+          title: 'Foro',
           description:
-            'Estamos trabajando en nuevas características para ofrecerte una mejor asesoría legal. ¡Espéralos pronto!',
-          button: 'Más Información',
-          path: '/chat',
+            'Podrás diferentes preguntas hechas por diferentes usuarios que ya han sido respondidas',
+          button: 'Foro',
+          path: '/foro',
         },
       ],
     },
-  },
-  form: {
-    name: 'Nombre',
-    email: 'Correo electrónico',
-    password: 'Contraseña',
-    confirmPassword: 'Confirmar contraseña',
-    rememberMe: 'Recordarme',
-    login: 'Iniciar sesión',
-    register: 'Registrarse',
-    forgotPassword: '¿Olvidaste tu contraseña?',
-    sendResetLink: 'Enviar enlace de reinicio',
-    dontHaveAccount: '¿No tienes una cuenta?',
-    createAccount: 'Crear cuenta',
-    alreadyHaveAccount: '¿Ya tienes una cuenta?',
-    signIn: 'Iniciar sesión',
-    backToLogin: 'Volver a iniciar sesión',
-  },
-  validation: {
-    required: 'Este campo es obligatorio',
-    email: 'Por favor, introduce un correo electrónico válido',
-    minLength: 'Debe tener al menos {min} caracteres',
-    passwordRequirements:
-      'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número',
-    passwordsMatch: 'Las contraseñas deben coincidir',
-  },
-  messages: {
-    loginSuccess: '¡Inicio de sesión exitoso!',
-    loginFailed: 'Error al iniciar sesión. Por favor, verifica tus credenciales.',
-    registerSuccess:
-      '¡Registro exitoso! Por favor, revisa tu correo electrónico para verificar tu cuenta.',
-    registerFailed: 'Error al registrarse. Por favor, inténtalo de nuevo.',
-    emailExists: 'Este correo electrónico ya está registrado',
-    resetLinkSent: 'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
-    fillRequiredFields: 'Por favor, rellena correctamente todos los campos obligatorios',
+    form: {
+      name: 'Nombre',
+      email: 'Correo electrónico',
+      password: 'Contraseña',
+      confirmPassword: 'Confirmar contraseña',
+      rememberMe: 'Recordarme',
+      login: 'Iniciar sesión',
+      register: 'Registrarse',
+      forgotPassword: '¿Olvidaste tu contraseña?',
+      sendResetLink: 'Enviar enlace de reinicio',
+      dontHaveAccount: '¿No tienes una cuenta?',
+      createAccount: 'Crear cuenta',
+      alreadyHaveAccount: '¿Ya tienes una cuenta?',
+      signIn: 'Iniciar sesión',
+      backToLogin: 'Volver a iniciar sesión',
+    },
+    validation: {
+      required: 'Este campo es obligatorio',
+      email: 'Por favor, introduce un correo electrónico válido',
+      minLength: 'Debe tener al menos {min} caracteres',
+      passwordRequirements:
+        'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número',
+      passwordsMatch: 'Las contraseñas deben coincidir',
+    },
+    messages: {
+      loginSuccess: '¡Inicio de sesión exitoso!',
+      loginFailed: 'Error al iniciar sesión. Por favor, verifica tus credenciales.',
+      registerSuccess:
+        '¡Registro exitoso! Por favor, revisa tu correo electrónico para verificar tu cuenta.',
+      registerFailed: 'Error al registrarse. Por favor, inténtalo de nuevo.',
+      emailExists: 'Este correo electrónico ya está registrado',
+      resetLinkSent: 'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
+      fillRequiredFields: 'Por favor, rellena correctamente todos los campos obligatorios',
+    },
   },
 };
 

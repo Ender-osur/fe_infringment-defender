@@ -4,13 +4,14 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, minLength, helpers, sameAs } from '@vuelidate/validators';
-import AuthService from '../../services/authService';
+import { useRegister } from '@/composables/auth/useRegister';
+
 import FormInput from '../../components/FormInput.vue';
-import { useNotification } from '../../composables/useNotification';
+
+const {isLoading, register, registerError} = useRegister();
 
 const { t } = useI18n();
 const router = useRouter();
-const { showNotification } = useNotification();
 
 // Form data
 const formData = ref({
@@ -20,9 +21,7 @@ const formData = ref({
   confirmPassword: '',
 });
 
-// Loading and error states
-const isLoading = ref(false);
-const registerError = ref('');
+
 
 // Password strength validation
 const hasUppercase = (value) => /[A-Z]/.test(value);
@@ -62,39 +61,26 @@ const v$ = useVuelidate(rules, formData);
 // Form submission
 const handleSubmit = async () => {
   registerError.value = '';
+  console.log("name :: ", formData.value.name);
 
   // Validate form
   const isFormValid = await v$.value.$validate();
   if (!isFormValid) return;
-
-  try {
-    isLoading.value = true;
-
-    // Attempt registration
-    await AuthService.register({
+  try{
+  await register({
       name: formData.value.name,
       email: formData.value.email,
       password: formData.value.password,
     });
-
-    // Show success notification
-    showNotification(t('messages.registerSuccess'), 'success');
-
-    // Redirect to login
-    router.push('/login');
+    router.router.push('/home');
   } catch (error) {
     console.error('Registration error:', error);
-
-    // Handle specific error for existing email
-    if (error.response?.status === 409) {
-      registerError.value = t('messages.emailExists');
-    } else {
-      registerError.value = t('messages.registerFailed');
-    }
+    registerError.value = t('messages.registerFailed');
   } finally {
     isLoading.value = false;
   }
 };
+
 </script>
 
 <template>
