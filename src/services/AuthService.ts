@@ -42,7 +42,7 @@ const AuthService = {
   },
 
   async register(params: RegisterParams): Promise<AuthResponse> {
-    console.log("register user servcice ...");
+    console.log('register user servcice ...');
     const response = await api.post<AuthResponse>('/auth/register', {
       fullName: params.name,
       email: params.email,
@@ -57,14 +57,11 @@ const AuthService = {
 
   async logout(): Promise<void> {
     try {
-      // Primero hacer la petición al servidor con el token aún disponible
       await api.post('/auth/logout');
-      console.log("Logout exitoso en el servidor");
+      console.log('Logout exitoso en el servidor');
     } catch (error) {
-      console.error("Error al hacer logout en el servidor:", error);
-      // Continuar con el proceso de logout local incluso si falla en el servidor
+      console.error('Error al hacer logout en el servidor:', error);
     } finally {
-      // Luego eliminar los tokens localmente
       localStorage.removeItem('token');
       sessionStorage.removeItem('token');
       localStorage.removeItem('user');

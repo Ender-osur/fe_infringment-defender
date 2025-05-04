@@ -2,12 +2,14 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useDark, useToggle } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 import { useAuthStore } from '@/stores/user';
 import AuthService from '@/services/authService';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+const router = useRouter();
 
 const isLangMenuOpen = ref(false);
 const scrollY = ref(0);
@@ -46,6 +48,8 @@ const handleResize = () => {
 
 const logout = () => {
   AuthService.logout();
+  userStore.logout();
+  router.push('/');
 };
 
 onMounted(() => {
@@ -77,6 +81,7 @@ watch(
       isAuth.value = false;
     }
   },
+  { immediate: true },
 );
 </script>
 
