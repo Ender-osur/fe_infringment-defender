@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n';
 const messages = {
   en: {
     nav: {
-      loguot:"Logout"
+      loguot: 'Logout',
     },
     chat: {
       header: 'Translater',
@@ -45,6 +45,12 @@ const messages = {
         },
       ],
     },
+    forum: {
+      title: 'Title',
+      comment: 'Commentary',
+      noPosts: "There are no posts in the forum yet",
+      create: "Create question"
+    },
     form: {
       name: 'Name',
       email: 'Email',
@@ -78,10 +84,14 @@ const messages = {
       resetLinkSent: 'Password reset link has been sent to your email',
       fillRequiredFields: 'Please fill in all required fields correctly',
     },
+    common: {
+      send: 'Send',
+      cancel: 'Cancel',
+    },
   },
   es: {
     nav: {
-      loguot:"Salir"
+      loguot: 'Salir',
     },
     chat: {
       header: 'Traductor',
@@ -110,8 +120,7 @@ const messages = {
       list: [
         {
           title: 'Asistencia en ley de tránsito',
-          description:
-            'Experimenta',
+          description: 'Experimenta',
           path: '/chat',
         },
         {
@@ -122,6 +131,12 @@ const messages = {
           path: '/foro',
         },
       ],
+    },
+    forum: {
+      title: 'Título',
+      comment: 'Comentario',
+      noPosts: "No hay publicaciones en el foro todavía",
+      create: "Crear pregunta"
     },
     form: {
       name: 'Nombre',
@@ -154,8 +169,13 @@ const messages = {
         '¡Registro exitoso! Por favor, revisa tu correo electrónico para verificar tu cuenta.',
       registerFailed: 'Error al registrarse. Por favor, inténtalo de nuevo.',
       emailExists: 'Este correo electrónico ya está registrado',
-      resetLinkSent: 'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
+      resetLinkSent:
+        'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
       fillRequiredFields: 'Por favor, rellena correctamente todos los campos obligatorios',
+    },
+    common: {
+      send: 'Enviar',
+      cancel: 'Cancelar',
     },
   },
 };

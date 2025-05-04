@@ -33,6 +33,12 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
+      path: '/foro',
+      name: '/foro',
+      component: () => import('../views/forum/ForumView.vue'),
+      meta: { requiresAuth: false },
+    },
+    {
       path: '/chat',
       name: 'chat',
       component: () => import('../views/chat/ChatView.vue'),
