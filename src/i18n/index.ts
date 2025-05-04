@@ -4,7 +4,6 @@ const messages = {
   en: {
     nav: {
       loguot: 'Logout',
-      loguot: 'Logout',
     },
     chat: {
       header: 'Translater',
@@ -89,14 +88,9 @@ const messages = {
       send: 'Send',
       cancel: 'Cancel',
     },
-    common: {
-      send: 'Send',
-      cancel: 'Cancel',
-    },
   },
   es: {
     nav: {
-      loguot: 'Salir',
       loguot: 'Salir',
     },
     chat: {
@@ -126,7 +120,6 @@ const messages = {
       list: [
         {
           title: 'Asistencia en ley de tránsito',
-          description: 'Experimenta',
           description: 'Experimenta',
           path: '/chat',
         },
@@ -176,8 +169,6 @@ const messages = {
         '¡Registro exitoso! Por favor, revisa tu correo electrónico para verificar tu cuenta.',
       registerFailed: 'Error al registrarse. Por favor, inténtalo de nuevo.',
       emailExists: 'Este correo electrónico ya está registrado',
-      resetLinkSent:
-        'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
       resetLinkSent:
         'Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico',
       fillRequiredFields: 'Por favor, rellena correctamente todos los campos obligatorios',
