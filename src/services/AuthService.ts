@@ -42,7 +42,7 @@ const AuthService = {
   },
 
   async register(params: RegisterParams): Promise<AuthResponse> {
-    console.log("register user servcice ...");
+    console.log('register user servcice ...');
     const response = await api.post<AuthResponse>('/auth/register', {
       fullName: params.name,
       email: params.email,
@@ -56,10 +56,16 @@ const AuthService = {
   },
 
   async logout(): Promise<void> {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
-    console.log("LLEGÓ AQUÍ");
-    await api.post('/auth/logout');
+    try {
+      await api.post('/auth/logout');
+      console.log('Logout exitoso en el servidor');
+    } catch (error) {
+      console.error('Error al hacer logout en el servidor:', error);
+    } finally {
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
   },
 };
 

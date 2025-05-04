@@ -24,13 +24,13 @@ const formData = ref({
 
 
 // Password strength validation
-const hasUppercase = (value) => /[A-Z]/.test(value);
-const hasLowercase = (value) => /[a-z]/.test(value);
-const hasNumber = (value) => /[0-9]/.test(value);
+const hasUppercase = (value: string) => /[A-Z]/.test(value);
+const hasLowercase = (value: string) => /[a-z]/.test(value);
+const hasNumber = (value: string) => /[0-9]/.test(value);
 
 const passwordRequirements = helpers.withMessage(
   t('validation.passwordRequirements'),
-  (value) => hasUppercase(value) && hasLowercase(value) && hasNumber(value),
+  (value: string) => hasUppercase(value) && hasLowercase(value) && hasNumber(value),
 );
 
 // Form validation rules
@@ -72,7 +72,7 @@ const handleSubmit = async () => {
       email: formData.value.email,
       password: formData.value.password,
     });
-    router.router.push('/home');
+    router.push('/home');
   } catch (error) {
     console.error('Registration error:', error);
     registerError.value = t('messages.registerFailed');
@@ -113,7 +113,7 @@ const handleSubmit = async () => {
           v-model="formData.name"
           :label="t('form.name')"
           type="text"
-          :error="v$.name.$errors[0]?.$message"
+          :error="v$.name.$errors[0]?.$message?.toString() || ''"
           :touched="v$.name.$dirty"
           @blur="v$.name.$touch()"
         />
@@ -123,7 +123,7 @@ const handleSubmit = async () => {
           v-model="formData.email"
           :label="t('form.email')"
           type="email"
-          :error="v$.email.$errors[0]?.$message"
+          :error="v$.email.$errors[0]?.$message?.toString() || ''"
           :touched="v$.email.$dirty"
           @blur="v$.email.$touch()"
         />
@@ -133,7 +133,7 @@ const handleSubmit = async () => {
           v-model="formData.password"
           :label="t('form.password')"
           type="password"
-          :error="v$.password.$errors[0]?.$message"
+          :error="v$.password.$errors[0]?.$message?.toString() || ''"
           :touched="v$.password.$dirty"
           @blur="v$.password.$touch()"
         />
@@ -143,7 +143,7 @@ const handleSubmit = async () => {
           v-model="formData.confirmPassword"
           :label="t('form.confirmPassword')"
           type="password"
-          :error="v$.confirmPassword.$errors[0]?.$message"
+          :error="v$.confirmPassword.$errors[0]?.$message?.toString() || ''"
           :touched="v$.confirmPassword.$dirty"
           @blur="v$.confirmPassword.$touch()"
         />
