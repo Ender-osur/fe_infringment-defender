@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useUserStore = defineStore('user', () => {
+export const useAuthStore = defineStore('user', () => {
   const userId = ref<string | null>(null);
   const isAuthenticated = ref(false);
   const conversationsId = ref<string | null>(null);

@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useDark, useToggle } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
 
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/user';
 import AuthService from '@/services/authService';
 
 const isDark = useDark();
@@ -12,7 +12,7 @@ const toggleDark = useToggle(isDark);
 const isLangMenuOpen = ref(false);
 const scrollY = ref(0);
 const isMobile = ref(window.innerWidth < 700);
-const userStore = useUserStore();
+const userStore = useAuthStore();
 const isAuth = ref(true);
 
 // Internationalization
@@ -45,9 +45,8 @@ const handleResize = () => {
 };
 
 const logout = () => {
-  AuthService.logout()
-}
-
+  AuthService.logout();
+};
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
@@ -62,20 +61,23 @@ onUnmounted(() => {
 });
 
 onMounted(() => {
-  if(!userStore.isAuthenticated) {
-    isAuth.value = true;
-  } else {
-    isAuth.value = false;
-  }
-})
-
-watch(() => userStore.isAuthenticated, () => {
-  if(userStore.isAuthenticated) {
+  if (!userStore.isAuthenticated) {
     isAuth.value = true;
   } else {
     isAuth.value = false;
   }
 });
+
+watch(
+  () => userStore.isAuthenticated,
+  () => {
+    if (userStore.isAuthenticated) {
+      isAuth.value = true;
+    } else {
+      isAuth.value = false;
+    }
+  },
+);
 </script>
 
 <template>
@@ -86,9 +88,11 @@ watch(() => userStore.isAuthenticated, () => {
     <div class="subcontainer-navbar w-full">
       <div class="flex items-center justify-around">
         <RouterLink to="/home">
-          <div class="flex flex-row w-full items-center gap-2 bg-dark dark:bg-light pr-4 rounded-xl">
+          <div
+            class="flex flex-row w-full items-center gap-2 bg-dark dark:bg-light pr-4 rounded-xl"
+          >
             <img src="/favicon.webp" alt="icono" height="40px" width="42px" />
-            <span class=" dark:text-osur-dark text-osur font-bold">Infringment Defender</span>
+            <span class="dark:text-osur-dark text-osur font-bold">Infringment Defender</span>
           </div>
         </RouterLink>
 
@@ -99,7 +103,7 @@ watch(() => userStore.isAuthenticated, () => {
             class="lang-button flex items-center space-x-1 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
             :style="{
               borderColor: isDark ? 'var(--color-hover-dark)' : '#ccc',
-              backgroundColor: isDark ? 'transparent' : 'white'
+              backgroundColor: isDark ? 'transparent' : 'white',
             }"
           >
             <span class="text-osur-dark dark:text-osur">

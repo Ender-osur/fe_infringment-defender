@@ -3,14 +3,14 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import AuthService from '@/services/authService';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/user';
 
 export function useLogin() {
   const isLoading = ref(false);
   const loginError = ref('');
   const router = useRouter();
   const { t } = useI18n();
-  const userStore = useUserStore();
+  const userStore = useAuthStore();
 
   const login = async ({
     email,
