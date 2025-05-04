@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useChat } from '@/composables/chatView/useChat';
 import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
@@ -10,6 +10,9 @@ const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = 
 
 const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId} = useChat();
 const responseConversation = ref();
+
+// Crear una propiedad computada para el ID de conversación
+const currentConversationId = computed(() => selectedConversationId.value);
 
 const selectConversation = async (id: string | number) => {
   localStorage.removeItem('currentPage');
@@ -86,7 +89,9 @@ onMounted(async () => {
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
         <button
         @click="() => {
-            setConversationId(selectedConversationId);
+            if (currentConversationId !== null) {
+              setConversationId(currentConversationId);
+            }
             openModal();
           }"
           class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
@@ -103,6 +108,7 @@ onMounted(async () => {
     <!-- Rating Modal -->
     <RatingModal
       :is-open="isModalOpen"
+      :conversation-id="currentConversationId"
       @close="closeModal"
       @submit="submitRating"
     />
