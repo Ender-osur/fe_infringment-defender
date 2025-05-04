@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch, nextTick } from 'vue';
 import { useChat } from '@/composables/chatView/useChat';
 import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
@@ -10,6 +10,13 @@ const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = 
 
 const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId} = useChat();
 const responseConversation = ref();
+
+const chatContainer = ref<HTMLElement | null>(null);
+const scrollToBottom = () => {
+  if (chatContainer.value) {
+    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+  }
+};
 
 // Crear una propiedad computada para el ID de conversación
 const currentConversationId = computed(() => selectedConversationId.value);
@@ -28,7 +35,14 @@ onMounted(async () => {
   console.log("monta el componente ...");
   // Cargar historial de conversaciones
   responseConversation.value = handleHistory();
+  scrollToBottom();
 });
+watch(messages, () => {
+  // Use nextTick to ensure DOM is updated
+  nextTick(() => {
+    scrollToBottom();
+  });
+}, { deep: true });
 </script>
 
 <template>
@@ -66,6 +80,7 @@ onMounted(async () => {
 
       <!-- Chat Messages -->
       <main
+      ref="chatContainer"
         class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto"
         @scroll="(e: Event) => {
           const target = e.target as HTMLElement;
