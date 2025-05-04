@@ -55,7 +55,6 @@ const logout = () => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('resize', handleResize);
-
   handleResize();
 });
 
