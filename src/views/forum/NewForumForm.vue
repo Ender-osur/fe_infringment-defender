@@ -47,10 +47,10 @@ const submitForum = async () => {
       ></textarea>
     </div>
     <div class="flex justify-end gap-2">
-      <button type="button" @click="clearForm" class="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400">
+      <button type="button" @click="clearForm" class="px-4 py-2 bg-[#888] dark:bg-[#555] text-light dark:text-light rounded hover:bg-[#777] hover:dark:bg-[#444] font-[400] tracking-[1px] cursor-pointer active:opacity-80">
         {{ $t('common.cancel') }}
       </button>
-      <button type="submit" class="px-4 py-2 bg-[var(--color-osur)] text-white rounded hover:bg-[var(--color-osur-hover)]">
+      <button type="submit" class="px-4 py-2 bg-osur-dark dark:bg-osur text-light dark:text-osur-dark rounded hover:bg-osur-2-dark hover:dark:bg-osur-2 font-[400] tracking-[1px] cursor-pointer active:opacity-80">
         {{ $t('common.send') }}
       </button>
     </div>
