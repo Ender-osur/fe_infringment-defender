@@ -15,6 +15,8 @@ const responseConversation = ref();
 const currentConversationId = computed(() => selectedConversationId.value);
 
 const selectConversation = async (id: string | number) => {
+  localStorage.removeItem('currentPage');
+  //.getItem('currentPage');
   selectedConversationId.value = Number(id);
   console.log("selectedConversationId.value :: ", selectedConversationId.value);
   messages.value = [];
@@ -68,7 +70,7 @@ onMounted(async () => {
         @scroll="(e: Event) => {
           const target = e.target as HTMLElement;
           if (target && target.scrollTop === 0) {
-            handleHistory();
+            handleMessage(selectedConversationId.value);
           }
         }"
       >
