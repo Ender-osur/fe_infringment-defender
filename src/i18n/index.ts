@@ -40,11 +40,11 @@ const messages = {
           path: '/chat',
         },
         {
-          title: 'Coming Soon',
+          title: 'lOGIN',
           description:
-            'We are working on new features for even better legal assistance. Stay tuned!',
-          button: 'More Information',
-          path: '/chat',
+            'Prove it',
+          button: 'Login',
+          path: '/login',
         },
       ],
     },
@@ -117,16 +117,15 @@ const messages = {
         {
           title: 'Asistencia en Ley de Tránsito',
           description:
-            'Haz preguntas relacionadas con las leyes de tránsito, tus derechos y violaciones. Recibe asesoría legal inmediata.',
-          button: 'Obtener Asesoría',
+            'Experimenta',
           path: '/chat',
         },
         {
-          title: 'Próximos Servicios',
+          title: 'LOGIN',
           description:
             'Estamos trabajando en nuevas características para ofrecerte una mejor asesoría legal. ¡Espéralos pronto!',
-          button: 'Más Información',
-          path: '/chat',
+          button: 'Iniciar sesión',
+          path: '/login',
         },
       ],
     },
