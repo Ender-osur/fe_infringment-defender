@@ -46,7 +46,6 @@ const handleSubmit = async () => {
 
     // Show success state
     resetSent.value = true;
-    showNotification(t('messages.resetLinkSent'), 'success');
   } catch (error) {
     console.error('Password reset error:', error);
     resetError.value = t('messages.resetLinkSent'); // Show same message for security
@@ -87,7 +86,6 @@ const handleSubmit = async () => {
             v-model="formData.email"
             :label="t('form.email')"
             type="email"
-            :error="v$.email.$errors[0]?.$message"
             :touched="v$.email.$dirty"
             @blur="v$.email.$touch()"
           />
