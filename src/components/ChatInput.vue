@@ -52,11 +52,6 @@ const sendMessage = () => {
   textareaHeight.value = '40px';
 };
 
-const verHistorial = () => {
-  console.log('Ver historial');
-  emit('send', "");
-};
-
 const open = ref(false);
 const selected = ref<string | null>(null);
 const dropdownRef = ref<HTMLElement | null>(null);

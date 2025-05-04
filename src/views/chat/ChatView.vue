@@ -5,7 +5,6 @@ import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
 import RatingModal from '@/components/RatingModal.vue';
-import { ConversationService } from '@/services/chat/conversationService';
 
 const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = useRating();
 
@@ -23,25 +22,6 @@ const selectConversation = async (id: string | number) => {
 
 onMounted(async () => {
   console.log("monta el componente ...");
-  
-  // Crear un nuevo registro de conversación al cargar la vista
-  try {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      const newConversation = await ConversationService.create(Number(userId), 'Nueva conversación');
-      console.log('Nueva conversación creada:', newConversation);
-      
-      // Seleccionar automáticamente la nueva conversación
-      if (newConversation && newConversation.id) {
-        selectedConversationId.value = newConversation.id;
-      }
-    } else {
-      console.error('No se encontró el ID del usuario en localStorage');
-    }
-  } catch (error) {
-    console.error('Error al crear nueva conversación:', error);
-  }
-  
   // Cargar historial de conversaciones
   responseConversation.value = handleHistory();
 });

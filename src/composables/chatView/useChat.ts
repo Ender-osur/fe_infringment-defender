@@ -115,7 +115,7 @@ export const useChat = () => {
           // Actualizar el estado con la nueva conversación
           conversationsData.value.unshift({
             id: newConversation.id,
-            text: `Conversación ${new Date().toLocaleString()}`,
+            text: `Conversación ${newConversation.id}`,
             timestamp: new Date(),
           });
           
