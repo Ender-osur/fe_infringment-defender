@@ -149,6 +149,7 @@ const messages = {
         {
           title: 'Asistencia en ley de tránsito',
           description: 'Chatea con un asistente legal impulsado por IA para obtener información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
+          button: 'Obtener Asesoría',
           path: '/chat',
         },
         {
