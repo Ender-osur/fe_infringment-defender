@@ -9,10 +9,14 @@ export interface Message{
     createdAt: string;
 }
 
+export interface MessageResponse {
+    result: Message[];
+}
+
 class MessageService {
     
 
-    async getMessagesByUser(conversationId: number): Promise<AxiosResponse<Message[]>> {
+    async getMessagesByUser(conversationId: number): Promise<AxiosResponse<MessageResponse>> {
         let currentPage = localStorage.getItem('currentPage');
         const limit  = import.meta.env.VITE_APP_LIMIT || '10';
 
@@ -23,7 +27,7 @@ class MessageService {
             currentPage = '1';
             localStorage.setItem('currentPage', (parseInt(currentPage)+1).toString());
         }
-        const response: AxiosResponse<Message[]> = await api.get(
+        const response: AxiosResponse<MessageResponse> = await api.get(
             `/conversations/messages/pagination?id=${conversationId}&page=${currentPage}&limit=${limit}`,
             {
                 headers: {
@@ -32,7 +36,7 @@ class MessageService {
                 },
             },
         )
-        console.log('response in service message :: ', response.data.result);
+        console.log('response in service message :: ', response.data);
         return response;
     }
 }

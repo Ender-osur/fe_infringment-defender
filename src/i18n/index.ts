@@ -13,6 +13,9 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Language',
     },
+    conversation: {
+      list: 'Conversation List'
+    },
     history: {
       header: 'Traductor',
       record: 'see history',
@@ -21,7 +24,7 @@ const messages = {
       lang: 'Idioma',
     },
     footer: {
-      rights: 'Developed by Osur.dev',
+      rights: 'Developed by Infringment Defender Team',
     },
     services: {
       title: 'Our services',
@@ -101,6 +104,9 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Idioma',
     },
+    conversation: {
+      list: 'Lista de conversaciones'
+    },
     history: {
       header: 'Traductor',
       placeholder: 'Escribe un mensaje...',
@@ -110,7 +116,7 @@ const messages = {
       lang: 'Idioma',
     },
     footer: {
-      rights: 'Desarrollador por Osur.dev',
+      rights: 'Desarrollador por Infringment Defender Team',
     },
     services: {
       title: 'Nuestros servicios',
