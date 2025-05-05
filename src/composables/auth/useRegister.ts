@@ -58,23 +58,30 @@ export function useRegister() {
         }
       }
 
-      // Redirect to login or dashboard
-      router.push('/login');
+      // Redirigir a la página de inicio
+      router.push('/home');
     } catch (error: unknown) {
       console.error('Registration error:', error);
 
-      // Handle specific error for existing email
-      if (
-        error &&
-        typeof error === 'object' &&
-        'response' in error &&
-        error.response &&
-        typeof error.response === 'object' &&
-        'status' in error.response &&
-        error.response.status === 409
-      ) {
-        registerError.value = t('messages.emailExists');
+      // Determinar el tipo de error para mostrar un mensaje más específico
+      if (error && typeof error === 'object' && 'response' in error) {
+        const errorResponse = error.response as { status?: number; data?: any };
+        
+        if (errorResponse && errorResponse.status === 409) {
+          // Email ya existe
+          registerError.value = t('messages.emailExists');
+        } else if (errorResponse && errorResponse.status && errorResponse.status >= 500) {
+          // Error del servidor
+          registerError.value = t('messages.registrationServerError');
+        } else {
+          registerError.value = t('messages.registerFailed');
+        }
+      } else if (error && typeof error === 'object' && 'message' in error && 
+                typeof error.message === 'string' && error.message.includes('Network')) {
+        // Error de red
+        registerError.value = t('messages.registrationNetworkError');
       } else {
+        // Error genérico
         registerError.value = t('messages.registerFailed');
       }
     } finally {
