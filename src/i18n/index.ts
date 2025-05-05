@@ -13,6 +13,7 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Language',
       endChat: 'End Chat',
+      chatEnded: 'This conversation has been ended and rated. Thank you for your feedback!',
     },
     rating: {
       title: 'Rate your experience',
@@ -123,6 +124,7 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Idioma',
       endChat: 'Finalizar Chat',
+      chatEnded: 'Esta conversación ha sido finalizada y calificada. ¡Gracias por tu retroalimentación!',
     },
     rating: {
       title: 'Califica tu experiencia',
@@ -147,6 +149,7 @@ const messages = {
         {
           title: 'Asistencia en ley de tránsito',
           description: 'Chatea con un asistente legal impulsado por IA para obtener información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
+          button: 'Obtener Asesoría',
           path: '/chat',
         },
         {
