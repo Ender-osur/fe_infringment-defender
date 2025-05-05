@@ -69,8 +69,8 @@ watch(messages, () => {
       <!-- Chat Header -->
       <header class="chat-header shrink-0 bg-white dark:bg-surface-dark flex items-center w-full justify-center">
         <div class="cabecera h-15 flex gap-4 items-center px-4 py-2 w-full max-w-screen-sm">
-          <div class="avatar w-11 h-11 overflow-hidden bg-white rounded-full">
-            <img class="w-full h-full object-cover" src="/bot.png" alt="Esta imagen es el avatar" />
+          <div class="avatar w-11 h-11 flex items-center justify-center bg-white rounded-full text-4xl">
+            🤖
           </div>
           <div class="dark:text-pt-light text-pt text-center">
             <span>{{ $t('chat.header') }}</span>
