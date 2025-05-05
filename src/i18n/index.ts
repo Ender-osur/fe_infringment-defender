@@ -12,6 +12,15 @@ const messages = {
       userMessage: 'You',
       botMessage: 'Bot',
       lang: 'Language',
+      endChat: 'End Chat',
+    },
+    rating: {
+      title: 'Rate your experience',
+      comment: 'Comment',
+      placeholder: 'Share your thoughts...',
+      cancel: 'Cancel',
+      submit: 'Submit',
+      ratingRequired: 'Please select a rating before continuing',
     },
     conversation:{
       title: "Coversation List",
@@ -113,6 +122,15 @@ const messages = {
       userMessage: 'Tú',
       botMessage: 'Bot',
       lang: 'Idioma',
+      endChat: 'Finalizar Chat',
+    },
+    rating: {
+      title: 'Califica tu experiencia',
+      comment: 'Comentario',
+      placeholder: 'Comparte tus pensamientos...',
+      cancel: 'Cancelar',
+      submit: 'Enviar',
+      ratingRequired: 'Por favor selecciona una calificación antes de continuar',
     },
     conversation:{
       title: "Lista de conversaciones",
