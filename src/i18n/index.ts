@@ -4,6 +4,7 @@ const messages = {
   en: {
     nav: {
       loguot: 'Logout',
+      login: 'Login'
     },
     chat: {
       header: 'Infringment Defeder Assitant',
@@ -115,7 +116,8 @@ const messages = {
   },
   es: {
     nav: {
-      loguot: 'Salir',
+      loguot: 'Cerrar sesión',
+      login: 'Iniciar sesión'
     },
     chat: {
       header: 'Asistente Defensor de infracciones',

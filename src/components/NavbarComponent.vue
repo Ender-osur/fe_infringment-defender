@@ -46,6 +46,10 @@ const handleResize = () => {
   isMobile.value = window.innerWidth < 700;
 };
 
+const login = () => {
+  router.push('/login');
+};
+
 const logout = () => {
   AuthService.logout();
   userStore.logout();
@@ -181,11 +185,10 @@ watch(
             </svg>
           </button>
           <button
-            v-if="isAuth"
-            @click="logout"
+            @click="isAuth ? logout() : login()"
             class="p-2 rounded-lg hover:bg-primary-hover dark:hover:bg-gray-800 transition-colors cursor-pointer text-dark dark:text-light"
           >
-            Logout
+            <span> {{ isAuth ? $t('nav.logout') : $t('nav.login') }} </span>
           </button>
         </div>
       </div>
