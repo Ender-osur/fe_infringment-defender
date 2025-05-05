@@ -3,7 +3,8 @@ import { createI18n } from 'vue-i18n';
 const messages = {
   en: {
     nav: {
-      loguot: 'Logout',
+      logout: 'Logout',
+      login: 'Login'
     },
     chat: {
       header: 'Infringment Defeder Assitant',
@@ -120,7 +121,8 @@ const messages = {
   },
   es: {
     nav: {
-      loguot: 'Salir',
+      logout: 'Cerrar sesión',
+      login: 'Iniciar sesión'
     },
     chat: {
       header: 'Asistente Defensor de infracciones',
