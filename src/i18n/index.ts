@@ -29,7 +29,7 @@ const messages = {
       title: "Coversation List",
     },
     footer: {
-      rights: 'Developed by Infringment Defender developers team',
+      rights: 'Developed by Infringment Defender team',
     },
     services: {
       title: 'Our services',
@@ -147,7 +147,7 @@ const messages = {
       title: "Lista de conversaciones",
     },
     footer: {
-      rights: 'Desarrollador por el equipo de desarrollo de Infringment Defender',
+      rights: 'Desarrollador por Infringment Defender team',
     },
     services: {
       title: 'Nuestros servicios',
