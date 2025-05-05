@@ -1,26 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useAuthStore } from '@/stores/user';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import api from '@/services/api/apiClient';
+import { useAuthStore } from '@/stores/user';
+import { useForum } from '@/composables/forum/useForum';
+
 import ForumList from './ForumList.vue';
 import NewForumForm from './NewForumForm.vue';
 
-const forums = ref([]);
 const showForm = ref(false);
-
-const authStore = useAuthStore();
-const isAuthenticated = authStore.isAuthenticated;
 const router = useRouter();
+const authStore = useAuthStore();
+const { forums, loadForums } = useForum();
 
-const loadForums = async () => {
-  try {
-    const { data } = await api.get('/forum/pagination?page=1&limit=50');
-    forums.value = data;
-  } catch (error) {
-    console.error('Error al cargar los foros', error);
-  }
-};
+const isAuthenticated = authStore.isAuthenticated;
 
 onMounted(() => {
   loadForums();
@@ -33,14 +25,25 @@ const handleCreateQuestion = () => {
     router.push('/login');
   }
 };
+
+const handleCancel = () => {
+  showForm.value = false;
+};
 </script>
+
 
 <template>
   <div class="p-4 max-w-3xl mx-auto space-y-6">
-    <!-- Mostrar formulario solo si está autenticado y se eligió crear -->
-    <NewForumForm v-if="showForm && isAuthenticated" @forumCreated="loadForums" />
+    <NewForumForm
+      v-if="showForm && isAuthenticated"
+      @forumCreated="() => { loadForums(); showForm = false; }"
+      @cancel="handleCancel"
+    />
 
-    <!-- Si ya hay publicaciones o no se ha hecho clic todavía -->
-    <ForumList :forums="forums" @createQuestion="handleCreateQuestion" />
+    <ForumList
+    v-else
+      :forums="forums"
+      @createQuestion="handleCreateQuestion"
+    />
   </div>
 </template>
