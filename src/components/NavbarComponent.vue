@@ -186,7 +186,7 @@ watch(
           </button>
           <button
             @click="isAuth ? logout() : login()"
-            class="p-2 rounded-lg hover:bg-primary-hover dark:hover:bg-gray-800 transition-colors cursor-pointer text-dark dark:text-light"
+            class="cursor-pointer px-4 py-2 rounded transition-colors duration-200 hover:opacity-80 font-semibold dark:text-dark text-light dark:bg-osur bg-osur-dark"
           >
             <span> {{ isAuth ? $t('nav.logout') : $t('nav.login') }} </span>
           </button>
