@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import api from '@/services/api/apiClient';
+import { useForum } from '@/composables/forum/useForum';
 
-const emit = defineEmits(['forumCreated']);
+const emit = defineEmits(['forumCreated', 'cancel']);
+const { createForum } = useForum();
+
 const title = ref('');
 const comment = ref('');
-
 
 const clearForm = () => {
   title.value = '';
@@ -14,46 +15,55 @@ const clearForm = () => {
 
 const submitForum = async () => {
   try {
-    await api.post('/forum', {
-      title: title.value,
-      comment: comment.value,
-    });
+    await createForum(title.value, comment.value);
     clearForm();
     emit('forumCreated');
   } catch (err) {
-    console.error('Error al enviar la pregunta', err);
+    console.error('Error al crear formulario', err);
   }
 };
 </script>
 
-
 <template>
-  <form @submit.prevent="submitForum" class="space-y-4 bg-[var(--color-light)] dark:bg-[var(--color-dark-2)] p-4 rounded-lg shadow">
+  <form
+    @submit.prevent="submitForum"
+    class="space-y-4 bg-light dark:bg-dark-2 p-4 rounded-lg shadow min-w-[35dvw]"
+  >
     <div>
-      <label class="block text-[var(--color-pt)] dark:text-[var(--color-pt-light)] font-semibold">{{ $t('forum.title') }}</label>
+      <label class="block font-semibold text-pt dark:text-pt-light">{{ $t('forum.title') }}</label>
       <input
         v-model="title"
         type="text"
-        class="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
+        class="w-full px-3 py-2 border rounded dark:border-light border-dark"
         required
       />
     </div>
+
     <div>
-      <label class="block text-[var(--color-pt)] dark:text-[var(--color-pt-light)] font-semibold">{{ $t('forum.comment') }}</label>
+      <label class="block font-semibold text-pt dark:text-pt-light">{{
+        $t('forum.comment')
+      }}</label>
       <textarea
         v-model="comment"
-        class="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
+        class="w-full px-3 py-2 border rounded dark:border-light border-dark"
         required
       ></textarea>
     </div>
+
     <div class="flex justify-end gap-2">
-      <button type="button" @click="clearForm" class="px-4 py-2 bg-[#888] dark:bg-[#555] text-light dark:text-light rounded hover:bg-[#777] hover:dark:bg-[#444] font-[400] tracking-[1px] cursor-pointer active:opacity-80">
+      <button
+        type="button"
+        @click="emit('cancel')"
+        class="px-4 py-2 bg-[#888] dark:bg-[#555] text-light rounded cursor-pointer"
+      >
         {{ $t('common.cancel') }}
       </button>
-      <button type="submit" class="px-4 py-2 bg-osur-dark dark:bg-osur text-light dark:text-osur-dark rounded hover:bg-osur-2-dark hover:dark:bg-osur-2 font-[400] tracking-[1px] cursor-pointer active:opacity-80">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-osur-dark dark:bg-osur text-light dark:text-dark rounded cursor-pointer"
+      >
         {{ $t('common.send') }}
       </button>
     </div>
   </form>
 </template>
-

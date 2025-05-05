@@ -183,7 +183,7 @@ watch(
           <button
             v-if="isAuth"
             @click="logout"
-            class="p-2 rounded-lg hover:bg-primary-hover dark:hover:bg-gray-800 transition-colors cursor-pointer"
+            class="p-2 rounded-lg hover:bg-primary-hover dark:hover:bg-gray-800 transition-colors cursor-pointer text-dark dark:text-light"
           >
             Logout
           </button>

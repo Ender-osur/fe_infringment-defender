@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
+<<<<<<< Updated upstream
   baseURL: 'http://localhost:3123/api',
+=======
+  baseURL: "https://beinfringmentdefenderai-production.up.railway.app/api",
+>>>>>>> Stashed changes
   headers: {
     'Content-Type': 'application/json',
   },
