@@ -103,11 +103,11 @@ const getUserInitials = () => {
         <!-- Contenido del post -->
         <div class="p-6">
           <div>
-            <div>
+            <div class="flex items-center justify-between">
               <h2 class="font-bold text-pt dark:text-pt-light text-xl">
                 {{ forumData.forum.title }}
               </h2>
-              <span class="text-xs text-gray-500 dark:text-gray-400 block mt-1">
+              <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">
                 {{ formatDate(forumData.forum.createdAt || '') }}
               </span>
             </div>
