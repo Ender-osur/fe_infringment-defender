@@ -28,7 +28,7 @@ const messages = {
         {
           title: 'Traffic law assistance',
           description:
-            'Ask questions related to traffic laws, rights, and violations. Get immediate legal advice.',
+            'Chat with an AI-powered legal assistant to get fast, reliable legal information related to traffic laws and violations.',
           button: 'Get Advice',
           path: '/chat',
         },
@@ -128,7 +128,7 @@ const messages = {
       list: [
         {
           title: 'Asistencia en ley de tránsito',
-          description: 'Experimenta',
+          description: 'Chatea con un asistente legal impulsado por IA para obtener información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
           path: '/chat',
         },
         {
