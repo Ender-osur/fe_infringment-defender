@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useDark, useToggle } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 import { useAuthStore } from '@/stores/user';
 import AuthService from '@/services/AuthService';
@@ -10,6 +10,7 @@ import AuthService from '@/services/AuthService';
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const router = useRouter();
+const route = useRoute();
 
 const isLangMenuOpen = ref(false);
 const scrollY = ref(0);
@@ -185,6 +186,7 @@ watch(
             </svg>
           </button>
           <button
+            v-if="route.path !== '/login'"
             @click="isAuth ? logout() : login()"
             class="cursor-pointer px-4 py-2 rounded transition-colors duration-200 hover:opacity-80 font-semibold dark:text-dark text-light dark:bg-osur bg-osur-dark"
           >
