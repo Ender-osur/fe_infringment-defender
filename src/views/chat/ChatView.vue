@@ -48,11 +48,11 @@ watch(messages, () => {
 <template>
   <div class="flex flex-row h-screen bg-light dark:bg-dark overflow-hidden">
     <!-- Sidebar: Conversation List -->
-    <aside class="w-1/3 bg-gray-100 dark:bg-gray-800 overflow-y-auto">
-      <header class="p-4 bg-white dark:bg-gray-900 shadow border-b border-gray-200 dark:border-gray-700">
+    <aside class="w-1/3 bg-gray-100 dark:bg-gray-800 flex flex-col">
+      <header class="p-4 bg-white dark:bg-gray-900 shadow border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
         <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('conversation.title') }}</h2>
       </header>
-      <div class="p-4 space-y-2">
+      <div class="p-4 space-y-2 overflow-y-auto flex-1">
         <div
           v-for="conversation in conversationsData"
           :key="conversation.id"
