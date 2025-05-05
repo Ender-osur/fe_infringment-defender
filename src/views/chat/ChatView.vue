@@ -50,7 +50,7 @@ watch(messages, () => {
     <!-- Sidebar: Conversation List -->
     <aside class="w-1/2 bg-gray-100 dark:bg-gray-800 overflow-y-auto">
       <header class="p-4 bg-white dark:bg-gray-900 shadow">
-        <h2 class="text-lg font-bold">{{ $t('conversation.list') }}</h2>
+        <h2 class="text-lg font-bold">{{ $t('conversation.title') }}</h2>
       </header>
       <div class="p-4 space-y-2">
         <div
@@ -102,18 +102,15 @@ watch(messages, () => {
 
       <!-- Chat Input -->
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
-        <button
-        @click="() => {
-            if (currentConversationId !== null) {
-              setConversationId(currentConversationId);
-            }
+      
+        <ChatInput 
+          @send="handleSend" 
+          @endChat="(id) => {
+            setConversationId(id);
             openModal();
           }"
-          class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
-        >
-          End Chat
-        </button>
-        <ChatInput @send="handleSend" />
+          :currentConversationId="currentConversationId"
+        />
      
       </div>
     </div>
