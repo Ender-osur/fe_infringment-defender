@@ -13,6 +13,7 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Language',
       endChat: 'End Chat',
+      chatEnded: 'This conversation has been ended and rated. Thank you for your feedback!',
     },
     rating: {
       title: 'Rate your experience',
@@ -123,6 +124,7 @@ const messages = {
       botMessage: 'Bot',
       lang: 'Idioma',
       endChat: 'Finalizar Chat',
+      chatEnded: 'Esta conversación ha sido finalizada y calificada. ¡Gracias por tu retroalimentación!',
     },
     rating: {
       title: 'Califica tu experiencia',

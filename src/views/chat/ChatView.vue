@@ -8,7 +8,7 @@ import RatingModal from '@/components/RatingModal.vue';
 
 const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = useRating();
 
-const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId, isLoading} = useChat();
+const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId, isLoading, isRated, checkRatingStatus} = useChat();
 const responseConversation = ref();
 
 const chatContainer = ref<HTMLElement | null>(null);
@@ -96,6 +96,8 @@ watch(messages, () => {
             :message="message.text"
             :is-user="message.isUser"
             :timestamp="message.timestamp"
+            :is-rating-message="message.isRatingMessage"
+            :rating-qualification="message.ratingQualification"
           />
           
           <!-- Typing indicator -->
@@ -117,6 +119,7 @@ watch(messages, () => {
             openModal();
           }"
           :currentConversationId="currentConversationId"
+          :isRated="isRated"
         />
      
       </div>
