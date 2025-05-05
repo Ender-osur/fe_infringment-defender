@@ -2,6 +2,10 @@
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const props = defineProps<{
+  currentConversationId: number | null;
+}>();
+
 const { t } = useI18n();
 
 const message = ref<string>('');
@@ -39,6 +43,7 @@ watch(message, () => {
 
 const emit = defineEmits<{
   (e: 'send', message: string): void;
+  (e: 'endChat', conversationId: number): void;
 }>();
 
 const sendMessage = () => {
@@ -79,6 +84,11 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside);
 });
+const handleEndChat = () => {
+  if (props.currentConversationId !== null) {
+    emit('endChat', props.currentConversationId);
+  }
+};
 </script>
 
 <template>
@@ -135,6 +145,13 @@ onBeforeUnmount(() => {
       >
         {{ t('chat.send') }}
       </button>
+
+      <button
+      @click="handleEndChat"
+      class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
+    >
+      End Chat
+    </button>
     </div>
   </div>
 </template>
