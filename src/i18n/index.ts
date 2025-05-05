@@ -155,7 +155,7 @@ const messages = {
         {
           title: 'Foro',
           description:
-            'Podrás diferentes preguntas hechas por diferentes usuarios que ya han sido respondidas',
+            'Podrás realizar diferentes preguntas realizadas por diferentes usuarios que ya han sido respondidas',
           button: 'Foro',
           path: '/foro',
         },
