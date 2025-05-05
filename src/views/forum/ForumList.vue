@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { type ForumWithComments, type Comment } from '@/services/forum/forumService';
+import { type ForumWithComments } from '@/services/forum/forumService';
 
-const props = defineProps<{ forums: ForumWithComments[]; isAuthenticated: boolean }>();
+defineProps<{ forums: ForumWithComments[]; isAuthenticated: boolean }>();
 const emit = defineEmits(['createQuestion', 'addComment']);
 
 // Estado para manejar los comentarios
@@ -22,10 +22,10 @@ const addComment = async (forumId: string) => {
     commentError.value[forumId] = 'El comentario no puede estar vacío';
     return;
   }
-  
+
   isSubmittingComment.value[forumId] = true;
   commentError.value[forumId] = '';
-  
+
   try {
     await emit('addComment', forumId, newComments.value[forumId]);
     newComments.value[forumId] = '';
@@ -45,7 +45,7 @@ const formatDate = (dateString: string) => {
     month: 'long',
     day: 'numeric',
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   });
 };
 
@@ -77,28 +77,16 @@ const getUserInitials = () => {
 
 <template>
   <div class="space-y-6">
-    <div
-      v-if="forums.length === 0"
-      class="text-center text-gray-500 dark:text-gray-400 space-y-4"
-    >
-      <button
-        class="px-4 py-2 bg-osur-dark dark:bg-osur text-light dark:text-osur-dark rounded hover:bg-osur-2-dark hover:dark:bg-osur-2 font-bold tracking-[1px] cursor-pointer active:opacity-80"
-        @click="emit('createQuestion')"
-      >
-        <p>{{ $t('forum.create') }}</p>
-      </button>
+    <div v-if="forums.length === 0" class="text-center text-gray-500 dark:text-gray-400 space-y-4">
       <p>{{ $t('forum.noPosts') }}</p>
     </div>
 
     <!-- Contenedor principal para cada post con ancho fijo -->
-    <div 
-      v-else 
-      class="space-y-6"
-    >
+    <div v-else class="flex flex-col justify-center items-center gap-6">
       <div
         v-for="forumData in forums"
         :key="forumData.forum.id"
-        class="border rounded-lg bg-[var(--color-light-2)] dark:bg-[var(--color-dark-3)] shadow-sm mb-6 w-full max-w-3xl mx-auto overflow-hidden"
+        class="border border-dark dark:border-light rounded-lg bg-light dark:bg-dark-2 shadow-md w-full max-w-3xl overflow-hidden"
       >
         <!-- Contenido del post -->
         <div class="p-6">
@@ -115,7 +103,8 @@ const getUserInitials = () => {
               {{ forumData.forum.description }}
             </p>
             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
-              {{ $t('forum.postedBy') }}: <span class="font-semibold">{{ forumData.forum.userName }}</span>
+              {{ $t('forum.postedBy') }}:
+              <span class="font-semibold">{{ forumData.forum.userName }}</span>
             </p>
           </div>
 
@@ -123,9 +112,13 @@ const getUserInitials = () => {
           <div class="mt-4">
             <button
               @click="toggleComments(forumData.forum.id)"
-              class="text-sm text-osur-dark dark:text-osur underline"
+              class="text-sm text-osur-dark dark:text-osur underline cursor-pointer"
             >
-              {{ showComments[forumData.forum.id] ? $t('forum.hideComments') : $t('forum.showComments') }}
+              {{
+                showComments[forumData.forum.id]
+                  ? $t('forum.hideComments')
+                  : $t('forum.showComments')
+              }}
               ({{ forumData.comments.length }})
             </button>
           </div>
@@ -133,11 +126,14 @@ const getUserInitials = () => {
 
         <!-- Sección de comentarios con el mismo ancho que el post -->
         <!-- Usamos un div con altura mínima cuando los comentarios no están visibles para mantener dimensiones consistentes -->
-        <div 
-          v-if="showComments[forumData.forum.id]" 
+        <div
+          v-if="showComments[forumData.forum.id]"
           class="border-t border-gray-200 dark:border-gray-700 bg-[var(--color-light-3)] dark:bg-[var(--color-dark-2)] p-6"
         >
-          <div v-if="forumData.comments.length === 0" class="text-sm text-gray-500 dark:text-gray-400">
+          <div
+            v-if="forumData.comments.length === 0"
+            class="text-sm text-gray-500 dark:text-gray-400"
+          >
             {{ $t('forum.noComments') }}
           </div>
 
@@ -147,7 +143,9 @@ const getUserInitials = () => {
             class="bg-[var(--color-light-2)] dark:bg-[var(--color-dark-3)] p-3 rounded-lg mb-3 border border-gray-200 dark:border-gray-700"
           >
             <div class="flex justify-between items-start">
-              <p class="font-semibold text-sm text-gray-800 dark:text-gray-200">{{ comment.userName }}</p>
+              <p class="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                {{ comment.userName }}
+              </p>
               <span class="text-xs text-gray-600 dark:text-gray-400">
                 {{ formatDate(comment.createdAt) }}
               </span>
@@ -158,7 +156,9 @@ const getUserInitials = () => {
           <!-- Formulario para agregar comentario -->
           <div class="mt-6" v-if="isAuthenticated">
             <div class="flex items-start gap-3">
-              <div class="w-10 h-10 rounded-full bg-osur-dark dark:bg-osur flex items-center justify-center text-white font-bold text-lg">
+              <div
+                class="w-10 h-10 rounded-full bg-osur-dark dark:bg-osur flex items-center justify-center text-white font-bold text-lg"
+              >
                 {{ isAuthenticated ? getUserInitials() : '?' }}
               </div>
               <div class="flex-1">
@@ -176,10 +176,29 @@ const getUserInitials = () => {
                       class="bg-osur-dark dark:bg-osur text-white dark:text-black py-1 px-4 rounded-lg text-sm font-medium hover:opacity-90 transition-colors border border-gray-300 dark:border-transparent shadow-md flex items-center"
                       :disabled="isSubmittingComment[forumData.forum.id]"
                     >
-                      <span v-if="isSubmittingComment[forumData.forum.id]" class="flex items-center">
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <span
+                        v-if="isSubmittingComment[forumData.forum.id]"
+                        class="flex items-center"
+                      >
+                        <svg
+                          class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"
+                          ></circle>
+                          <path
+                            class="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
                         </svg>
                         {{ $t('forum.sendingComment') }}
                       </span>
@@ -195,14 +214,22 @@ const getUserInitials = () => {
           </div>
           <div class="mt-4" v-else>
             <div class="text-center">
-              <router-link to="/login" class="inline-block py-2 px-6 bg-osur-dark dark:bg-osur text-white dark:text-black rounded-lg hover:opacity-90 transition-colors text-sm font-medium border border-gray-300 dark:border-transparent shadow-md">
-                {{ $t('forum.loginToComment') }}
+              <router-link
+                to="/login"
+                class="inline-block py-2 px-6 bg-osur-dark dark:bg-osur rounded-lg hover:opacity-90 transition-colors text-sm font-medium border border-gray-300 dark:border-transparent shadow-md"
+              >
+                <span class=" text-light dark:text-dark">
+                  {{ $t('forum.loginToComment') }}
+                </span>
               </router-link>
             </div>
           </div>
         </div>
         <!-- Agregamos un div con altura mínima cuando los comentarios no están visibles -->
-        <div v-else class="border-t border-gray-200 dark:border-gray-700 bg-[var(--color-light-3)] dark:bg-[var(--color-dark-2)] min-h-[1px]"></div>
+        <div
+          v-else
+          class="border-t border-gray-200 dark:border-gray-700 bg-[var(--color-light-3)] dark:bg-[var(--color-dark-2)] min-h-[1px]"
+        ></div>
       </div>
     </div>
   </div>

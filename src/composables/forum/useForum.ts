@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import ForumService, { type ForumWithComments, type Comment } from '@/services/forum/forumService';
+import ForumService, { type ForumWithComments } from '@/services/forum/forumService';
 
 export function useForum() {
   const forums = ref<ForumWithComments[]>([]);
