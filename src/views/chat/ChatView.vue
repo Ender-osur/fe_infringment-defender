@@ -49,17 +49,17 @@ watch(messages, () => {
   <div class="flex flex-row h-screen bg-light dark:bg-dark overflow-hidden">
     <!-- Sidebar: Conversation List -->
     <aside class="w-1/3 bg-gray-100 dark:bg-gray-800 overflow-y-auto">
-      <header class="p-4 bg-white dark:bg-gray-900 shadow">
-        <h2 class="text-lg font-bold">{{ $t('conversation.title') }}</h2>
+      <header class="p-4 bg-white dark:bg-gray-900 shadow border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ $t('conversation.title') }}</h2>
       </header>
       <div class="p-4 space-y-2">
         <div
           v-for="conversation in conversationsData"
           :key="conversation.id"
-          class="p-2 bg-white dark:bg-gray-700 rounded shadow cursor-pointer"
+          class="p-2 bg-white dark:bg-gray-700 rounded shadow cursor-pointer border border-gray-200 dark:border-gray-600"
           @click="selectConversation(conversation.id)"
         >
-          {{ conversation.text }}
+          <p class="text-gray-800 dark:text-gray-200 font-medium">{{ conversation.text }}</p>
         </div>
       </div>
     </aside>
