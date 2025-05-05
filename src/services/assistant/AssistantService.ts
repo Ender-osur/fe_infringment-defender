@@ -14,6 +14,8 @@ export const AssistantService = {
   async sendMessage(data: AssistantRequest): Promise<AssistantResponse> {
     console.log('Enviando petición al asistente con datos:', data);
     try {
+      data.reqLanguage = 'español';
+      console.log('Idioma predeterminado:', data.reqLanguage);
       const response = await api.post('/assistant', data, {
         headers: {
           'Content-Type': 'application/json',
