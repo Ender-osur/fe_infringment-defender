@@ -48,7 +48,7 @@ watch(messages, () => {
 <template>
   <div class="flex flex-row h-screen bg-light dark:bg-dark overflow-hidden">
     <!-- Sidebar: Conversation List -->
-    <aside class="w-1/2 bg-gray-100 dark:bg-gray-800 overflow-y-auto">
+    <aside class="w-1/3 bg-gray-100 dark:bg-gray-800 overflow-y-auto">
       <header class="p-4 bg-white dark:bg-gray-900 shadow">
         <h2 class="text-lg font-bold">{{ $t('conversation.title') }}</h2>
       </header>
@@ -65,7 +65,7 @@ watch(messages, () => {
     </aside>
 
     <!-- Main Chat Area -->
-    <div class="flex flex-col w-1/2">
+    <div class="flex flex-col w-2/3">
       <!-- Chat Header -->
       <header class="chat-header shrink-0 bg-white dark:bg-surface-dark flex items-center w-full justify-center">
         <div class="cabecera h-15 flex gap-4 items-center px-4 py-2 w-full max-w-screen-sm">
@@ -108,7 +108,7 @@ watch(messages, () => {
       </main>
 
       <!-- Chat Input -->
-      <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
+      <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700 mx-auto">
       
         <ChatInput 
           @send="handleSend" 
