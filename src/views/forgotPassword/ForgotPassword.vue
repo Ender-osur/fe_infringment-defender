@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, helpers } from '@vuelidate/validators';
-import AuthService from '../../services/authService';
+import AuthService from '../../services/AuthService';
 import FormInput from '../../components/FormInput.vue';
 
 const { t } = useI18n();
@@ -46,7 +46,6 @@ const handleSubmit = async () => {
 
     // Show success state
     resetSent.value = true;
-    showNotification(t('messages.resetLinkSent'), 'success');
   } catch (error) {
     console.error('Password reset error:', error);
     resetError.value = t('messages.resetLinkSent'); // Show same message for security
@@ -87,7 +86,6 @@ const handleSubmit = async () => {
             v-model="formData.email"
             :label="t('form.email')"
             type="email"
-            :error="v$.email.$errors[0]?.$message"
             :touched="v$.email.$dirty"
             @blur="v$.email.$touch()"
           />

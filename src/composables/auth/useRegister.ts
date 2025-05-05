@@ -2,9 +2,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
-import AuthService from '@/services/authService';
+import AuthService from '@/services/AuthService';
 import { decodeToken } from '../useJWT';
-
 
 export function useRegister() {
   const isLoading = ref(false);
@@ -16,8 +15,12 @@ export function useRegister() {
     name,
     email,
     password,
-  }: { name: string; email: string; password: string }) => {
-    console.log("register controller :: ", name, email, password);
+  }: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    console.log('register controller :: ', name, email, password);
     registerError.value = '';
 
     try {
@@ -27,7 +30,7 @@ export function useRegister() {
       const result = await AuthService.register({
         name,
         email,
-        password
+        password,
       });
 
       console.log('Registration successful:', result);
@@ -47,7 +50,7 @@ export function useRegister() {
           const userInfo = {
             id: decodedToken.userId,
             email: decodedToken.email || email,
-            fullName: name
+            fullName: name,
           };
 
           // Guardar la información del usuario en localStorage
@@ -61,9 +64,15 @@ export function useRegister() {
       console.error('Registration error:', error);
 
       // Handle specific error for existing email
-      if (error && typeof error === 'object' && 'response' in error &&
-        error.response && typeof error.response === 'object' &&
-        'status' in error.response && error.response.status === 409) {
+      if (
+        error &&
+        typeof error === 'object' &&
+        'response' in error &&
+        error.response &&
+        typeof error.response === 'object' &&
+        'status' in error.response &&
+        error.response.status === 409
+      ) {
         registerError.value = t('messages.emailExists');
       } else {
         registerError.value = t('messages.registerFailed');

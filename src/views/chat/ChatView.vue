@@ -1,50 +1,48 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed, watch, nextTick } from 'vue';
 import { useChat } from '@/composables/chatView/useChat';
 import { useRating } from '@/composables/rating/useRating';
 import ChatMessages from '@/components/ChatMessages.vue';
 import ChatInput from '@/components/ChatInput.vue';
 import RatingModal from '@/components/RatingModal.vue';
-import { ConversationService } from '@/services/chat/conversationService';
 
-const { isModalOpen, openModal, closeModal, submitRating } = useRating();
+const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = useRating();
 
 const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId} = useChat();
 const responseConversation = ref();
 
+const chatContainer = ref<HTMLElement | null>(null);
+const scrollToBottom = () => {
+  if (chatContainer.value) {
+    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+  }
+};
+
+// Crear una propiedad computada para el ID de conversación
+const currentConversationId = computed(() => selectedConversationId.value);
+
 const selectConversation = async (id: string | number) => {
+  localStorage.removeItem('currentPage');
+  //.getItem('currentPage');
   selectedConversationId.value = Number(id);
   console.log("selectedConversationId.value :: ", selectedConversationId.value);
   messages.value = [];
   handleMessage(Number(id));
   console.log("conversation id: ", id);
-
 };
 
 onMounted(async () => {
   console.log("monta el componente ...");
-  
-  // Crear un nuevo registro de conversación al cargar la vista
-  try {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      const newConversation = await ConversationService.create(Number(userId), 'Nueva conversación');
-      console.log('Nueva conversación creada:', newConversation);
-      
-      // Seleccionar automáticamente la nueva conversación
-      if (newConversation && newConversation.id) {
-        selectedConversationId.value = newConversation.id;
-      }
-    } else {
-      console.error('No se encontró el ID del usuario en localStorage');
-    }
-  } catch (error) {
-    console.error('Error al crear nueva conversación:', error);
-  }
-  
   // Cargar historial de conversaciones
   responseConversation.value = handleHistory();
+  scrollToBottom();
 });
+watch(messages, () => {
+  // Use nextTick to ensure DOM is updated
+  nextTick(() => {
+    scrollToBottom();
+  });
+}, { deep: true });
 </script>
 
 <template>
@@ -82,11 +80,12 @@ onMounted(async () => {
 
       <!-- Chat Messages -->
       <main
+      ref="chatContainer"
         class="flex-1 overflow-y-auto px-4 py-2 w-full max-w-screen-sm mx-auto"
         @scroll="(e: Event) => {
           const target = e.target as HTMLElement;
           if (target && target.scrollTop === 0) {
-            handleHistory();
+            handleMessage(currentConversationId);
           }
         }"
       >
@@ -104,7 +103,12 @@ onMounted(async () => {
       <!-- Chat Input -->
       <div class="chat-input w-full max-w-screen-sm shrink-0 px-4 py-3 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700">
         <button
-          @click="openModal"
+        @click="() => {
+            if (currentConversationId !== null) {
+              setConversationId(currentConversationId);
+            }
+            openModal();
+          }"
           class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
         >
           End Chat
@@ -119,6 +123,7 @@ onMounted(async () => {
     <!-- Rating Modal -->
     <RatingModal
       :is-open="isModalOpen"
+      :conversation-id="currentConversationId"
       @close="closeModal"
       @submit="submitRating"
     />

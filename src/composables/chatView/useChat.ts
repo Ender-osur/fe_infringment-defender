@@ -115,7 +115,7 @@ export const useChat = () => {
           // Actualizar el estado con la nueva conversación
           conversationsData.value.unshift({
             id: newConversation.id,
-            text: `Conversación ${new Date().toLocaleString()}`,
+            text: `Conversación ${newConversation.id}`,
             timestamp: new Date(),
           });
           
@@ -197,18 +197,29 @@ export const useChat = () => {
 
 
 
-  const handleMessage = (conversationId: number) => {
+  const handleMessage = (conversationId: number | null) => {
     console.log("el id de la conversación es :: ", conversationId);
-
-const response = messageService.getMessagesByUser(conversationId);
+    // Si conversationId es undefined o null, usar selectedConversationId.value
+    const actualConversationId = conversationId ?? selectedConversationId.value;
+    
+    // Verificar que tengamos un ID de conversación válido
+    if (actualConversationId === null) {
+      console.error("No hay ID de conversación disponible");
+      return;
+    }
+    
+    console.log("el id de la conversación después es :: ", actualConversationId);
+    
+    const response = messageService.getMessagesByUser(actualConversationId);
     console.log('response :: ', response);
     response.then((res) => {
       console.log('res :: ', res);
+      // Acceder directamente a res.data ya que es de tipo Message[]
       const messagesData = res.data;
       console.log('messagesData :: ', messagesData);
 
 
-      messagesData.forEach((message) => {
+      messagesData.result.forEach((message) => {
           messages.value.unshift({
             id: message.id,
             text: message.content,
@@ -221,7 +232,6 @@ const response = messageService.getMessagesByUser(conversationId);
       console.error('Error fetching messages:', error)
     })
 }
-
 
 
   return {
