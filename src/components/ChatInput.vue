@@ -85,7 +85,7 @@ const handleEndChat = () => {
         @click="handleEndChat"
         class="px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
       >
-        End Chat
+        {{ t('chat.endChat') }}
       </button>
     </div>
   </div>
