@@ -20,6 +20,7 @@ const messages = {
       placeholder: 'Share your thoughts...',
       cancel: 'Cancel',
       submit: 'Submit',
+      ratingRequired: 'Please select a rating before continuing',
     },
     conversation:{
       title: "Coversation List",
@@ -129,6 +130,7 @@ const messages = {
       placeholder: 'Comparte tus pensamientos...',
       cancel: 'Cancelar',
       submit: 'Enviar',
+      ratingRequired: 'Por favor selecciona una calificación antes de continuar',
     },
     conversation:{
       title: "Lista de conversaciones",
