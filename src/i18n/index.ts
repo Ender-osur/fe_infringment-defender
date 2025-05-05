@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n';
 const messages = {
   en: {
     nav: {
-      loguot: 'Logout',
+      logout: 'Logout',
       login: 'Login'
     },
     chat: {
@@ -121,7 +121,7 @@ const messages = {
   },
   es: {
     nav: {
-      loguot: 'Cerrar sesión',
+      logout: 'Cerrar sesión',
       login: 'Iniciar sesión'
     },
     chat: {
