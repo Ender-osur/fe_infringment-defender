@@ -8,7 +8,7 @@ import RatingModal from '@/components/RatingModal.vue';
 
 const { isModalOpen, openModal, closeModal, submitRating, setConversationId } = useRating();
 
-const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId} = useChat();
+const { messages, conversationsData, handleSend, handleHistory, handleMessage, selectedConversationId, isLoading} = useChat();
 const responseConversation = ref();
 
 const chatContainer = ref<HTMLElement | null>(null);
@@ -97,6 +97,13 @@ watch(messages, () => {
             :is-user="message.isUser"
             :timestamp="message.timestamp"
           />
+          
+          <!-- Typing indicator -->
+          <div v-if="isLoading" class="flex mb-4 justify-start">
+            <div class="max-w-full rounded-lg px-4 py-2 dark:text-bot-chat-light text-bot-chat-dark">
+              <p class="text-sm md:text-base break-words">escribiendo...</p>
+            </div>
+          </div>
         </div>
       </main>
 
