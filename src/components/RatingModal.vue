@@ -20,7 +20,9 @@ const handleSubmit = () => {
   comment.value = '';
 };
 const handleClose = () => {
-  emit('close');
+  if (qualification.value > 0) {
+    emit('close');
+  }
 };
 </script>
 <template>
@@ -41,6 +43,7 @@ const handleClose = () => {
             ★
           </button>
         </div>
+        <p v-if="!qualification" class="text-red-500 text-sm mb-4">{{ t('rating.ratingRequired') }}</p>
         <!-- Comment Input -->
         <FormInput
           v-model="comment"
@@ -53,6 +56,7 @@ const handleClose = () => {
           <button
             @click="handleClose"
             class="px-4 py-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+            :disabled="!qualification"
           >
             {{ t('rating.cancel') }}
           </button>

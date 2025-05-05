@@ -180,15 +180,22 @@ export const useChat = () => {
         console.log('res solo :: ', res);
         const conversations = res.data;
         console.log('conversations :: ', conversations);
+        
+        // Limpiar las conversaciones existentes
+        conversationsData.value = [];
+        
+        // Agregar las conversaciones al array
         conversations.forEach((conversation) => {
-          //conversation.messages.forEach((message) => {
-            conversationsData.value.push({
-              id: conversation.id,
-              text: "Conversation "+ conversation.id,
-              timestamp: new Date(),
-            })
-          //})
-        })
+          conversationsData.value.push({
+            id: conversation.id,
+            text: "Conversation "+ conversation.id,
+            timestamp: new Date(conversation.createdAt || Date.now()),
+          });
+        });
+        
+        // Ordenar las conversaciones por timestamp, de más reciente a más antigua
+        conversationsData.value.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+        
         return responseConversation;
       }).catch((error) => {
         console.log('Error fetching history :: ', error)
