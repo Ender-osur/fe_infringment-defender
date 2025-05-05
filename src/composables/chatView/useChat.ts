@@ -2,6 +2,7 @@ import { consultService } from '@/services/chat/ConsultService'
 import { messageService } from '@/services/messages/MessageService'
 import { AssistantService } from '@/services/assistant/AssistantService'
 import { ConversationService } from '@/services/chat/conversationService'
+import { ratingService } from '@/services/rating/ratingService'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -10,6 +11,8 @@ export interface Message {
   text: string
   isUser: boolean
   timestamp: Date
+  isRatingMessage?: boolean
+  ratingQualification?: number
 }
 
 export interface Conversation {
@@ -32,6 +35,9 @@ export const useChat = () => {
   const isCreatingConversation = ref(false)
   const selectedConversationId = ref<number | null>(null);
   const isLoading = ref(false);
+  const isRated = ref(false);
+  const ratingQualification = ref<number | null>(null);
+  const ratingComment = ref<string>('');
   const router = useRouter();
 
   // Función para obtener el ID del usuario desde localStorage o desde el objeto user
@@ -217,6 +223,9 @@ export const useChat = () => {
     
     console.log("el id de la conversación después es :: ", actualConversationId);
     
+    // Verificar si la conversación ha sido calificada
+    checkRatingStatus(actualConversationId);
+    
     const response = messageService.getMessagesByUser(actualConversationId);
     console.log('response :: ', response);
     response.then((res) => {
@@ -238,8 +247,45 @@ export const useChat = () => {
     }).catch((error) => {
       console.error('Error fetching messages:', error)
     })
-}
+  }
 
+  const checkRatingStatus = async (conversationId: number | null) => {
+    if (!conversationId) return;
+    
+    try {
+      // Primero verificamos si existe una calificación
+      const response = await ratingService.getRating(conversationId);
+      isRated.value = response.existExperience;
+      console.log('Conversación calificada:', isRated.value);
+      
+      // Si existe una calificación, obtenemos los detalles
+      if (isRated.value) {
+        try {
+          const detailsResponse = await ratingService.getRatingDetails(conversationId);
+          ratingQualification.value = detailsResponse.qualification || null;
+          ratingComment.value = detailsResponse.comment || '';
+          console.log('Calificación:', ratingQualification.value, 'Comentario:', ratingComment.value);
+        } catch (error) {
+          console.error('Error al obtener detalles de calificación:', error);
+        }
+        
+        // Añadir un mensaje informativo si no existe ya
+        if (!messages.value.some(msg => msg.isRatingMessage)) {
+          const i18nKey = 'chat.chatEnded';
+          messages.value.push({
+            id: Date.now(),
+            text: i18nKey,
+            isUser: false,
+            timestamp: new Date(),
+            isRatingMessage: true,
+            ratingQualification: ratingQualification.value || undefined
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error al verificar el estado de calificación:', error);
+    }
+  };
 
   return {
     messages,
@@ -248,6 +294,10 @@ export const useChat = () => {
     conversationsData,
     handleMessage,
     selectedConversationId,
-    isLoading
+    isLoading,
+    isRated,
+    ratingQualification,
+    ratingComment,
+    checkRatingStatus
   }
 }
