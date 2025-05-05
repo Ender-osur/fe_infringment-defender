@@ -6,7 +6,7 @@ import { required, helpers, maxLength } from '@vuelidate/validators';
 import { useForum } from '@/composables/forum/useForum';
 import FormInput from '@/components/FormInput.vue';
 
-const props = defineProps<{
+defineProps<{
   isModal?: boolean; // Si es true, se muestra como modal
 }>();
 
@@ -54,7 +54,7 @@ const clearForm = () => {
 // Enviar formulario
 const submitForm = async () => {
   formError.value = '';
-  
+
   const isFormValid = await v$.value.$validate();
   if (!isFormValid) return;
 
@@ -116,7 +116,7 @@ const submitForm = async () => {
 
         <!-- Descripción -->
         <div>
-          <label 
+          <label
             class="block text-sm font-medium text-dark dark:text-light mb-1"
             style="font-family: var(--font-sans)"
           >
