@@ -101,6 +101,9 @@ const handleEndChat = () => {
         rows="1"
         :placeholder="t('chat.placeholder')"
         @keyup.enter.exact.prevent="sendMessage"
+        :autoresize="true"
+        @input="autoResize"
+        :maxlength="250"
         :class="[
           'w-full resize-none max-h-[16rem] px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-osur-dark focus:dark:border-osur dark:bg-hover-dark dark:text-pti-light text-pti-dark',
           showScrollbar ? 'overflow-y-auto' : 'overflow-hidden',
