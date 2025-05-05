@@ -14,6 +14,7 @@ const messages = {
       lang: 'Language',
       endChat: 'End Chat',
       chatEnded: 'This conversation has been ended and rated. Thank you for your feedback!',
+      typing: 'typing',
     },
     rating: {
       title: 'Rate your experience',
@@ -125,6 +126,7 @@ const messages = {
       lang: 'Idioma',
       endChat: 'Finalizar Chat',
       chatEnded: 'Esta conversación ha sido finalizada y calificada. ¡Gracias por tu retroalimentación!',
+      typing: 'writing',
     },
     rating: {
       title: 'Califica tu experiencia',

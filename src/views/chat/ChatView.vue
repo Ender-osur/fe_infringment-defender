@@ -103,7 +103,9 @@ watch(messages, () => {
           <!-- Typing indicator -->
           <div v-if="isLoading" class="flex mb-4 justify-start">
             <div class="max-w-full rounded-lg px-4 py-2 dark:text-bot-chat-light text-bot-chat-dark">
-              <p class="text-sm md:text-base break-words">escribiendo...</p>
+              <p class="text-sm md:text-base break-words typing-indicator">
+                {{ $t('chat.typing') }}<span class="dot-1">.</span><span class="dot-2">.</span><span class="dot-3">.</span>
+              </p>
             </div>
           </div>
         </div>
@@ -148,5 +150,30 @@ watch(messages, () => {
 }
 .chat-input.dark {
   box-shadow: 0px -10px 15px -20px #000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.typing-indicator {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+
+.dot-1 {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.dot-2 {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.dot-3 {
+  animation: fadeInOut 1.5s ease-in-out infinite;
+  animation-delay: 1s;
 }
 </style>
