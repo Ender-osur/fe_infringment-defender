@@ -59,9 +59,31 @@ export function useLogin() {
       }
 
       router.push('/');
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
-      loginError.value = t('messages.loginFailed');
+      
+      // Determinar el tipo de error para mostrar un mensaje más específico
+      if (error && typeof error === 'object' && 'response' in error) {
+        const errorResponse = error.response as { status?: number };
+        
+        if (errorResponse && errorResponse.status === 401) {
+          // Credenciales inválidas
+          loginError.value = t('messages.credentialsInvalid');
+        } else if (errorResponse && errorResponse.status && errorResponse.status >= 500) {
+          // Error del servidor
+          loginError.value = t('messages.serverError');
+        } else {
+          // Otro tipo de error de respuesta
+          loginError.value = t('messages.loginFailed');
+        }
+      } else if (error && typeof error === 'object' && 'message' in error && 
+                typeof error.message === 'string' && error.message.includes('Network')) {
+        // Error de red
+        loginError.value = t('messages.networkError');
+      } else {
+        // Error genérico
+        loginError.value = t('messages.loginFailed');
+      }
     } finally {
       isLoading.value = false;
     }
