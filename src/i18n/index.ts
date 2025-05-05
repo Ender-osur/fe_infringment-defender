@@ -6,25 +6,18 @@ const messages = {
       loguot: 'Logout',
     },
     chat: {
-      header: 'Translater',
+      header: 'Infringment Defeder Assitant',
       placeholder: 'Type a message...',
       send: 'Send',
       userMessage: 'You',
       botMessage: 'Bot',
       lang: 'Language',
     },
-    conversation: {
-      list: 'Conversation List'
-    },
-    history: {
-      header: 'Traductor',
-      record: 'see history',
-      userMessage: 'Tú',
-      botMessage: 'Bot',
-      lang: 'Idioma',
+    conversation:{
+      title: "Coversation List",
     },
     footer: {
-      rights: 'Developed by Infringment Defender Team',
+      rights: 'Developed by Osur.dev',
     },
     services: {
       title: 'Our services',
@@ -97,26 +90,18 @@ const messages = {
       loguot: 'Salir',
     },
     chat: {
-      header: 'Traductor',
+      header: 'Asistente Defensor de infracciones',
       placeholder: 'Escribe un mensaje...',
       send: 'Enviar',
       userMessage: 'Tú',
       botMessage: 'Bot',
       lang: 'Idioma',
     },
-    conversation: {
-      list: 'Lista de conversaciones'
-    },
-    history: {
-      header: 'Traductor',
-      placeholder: 'Escribe un mensaje...',
-      record: 'Ver historial',
-      userMessage: 'Tú',
-      botMessage: 'Bot',
-      lang: 'Idioma',
+    conversation:{
+      title: "Lista de conversaciones",
     },
     footer: {
-      rights: 'Desarrollador por Infringment Defender Team',
+      rights: 'Desarrollador por Osur.dev',
     },
     services: {
       title: 'Nuestros servicios',
