@@ -13,20 +13,6 @@ const messageInput = ref<HTMLTextAreaElement | null>(null);
 const showScrollbar = ref(false);
 const textareaHeight = ref('40px');
 
-const languages = [
-  'English', // Inglés
-  'Español', // Español
-  'Français', // Francés
-  'Deutsch', // Alemán
-  'Italiano', // Italiano
-  'Português', // Portugués
-  'Русский', // Ruso
-  '中文', // Chino (chino simplificado)
-  '日本語', // Japonés
-  'العربية', // Árabe
-  '한국어', // Coreano
-];
-
 const autoResize = () => {
   const el = messageInput.value;
   if (!el) return;
@@ -57,33 +43,6 @@ const sendMessage = () => {
   textareaHeight.value = '40px';
 };
 
-const open = ref(false);
-const selected = ref<string | null>(null);
-const dropdownRef = ref<HTMLElement | null>(null);
-
-const toggleDropdown = () => {
-  open.value = !open.value;
-};
-
-const select = (lang: string) => {
-  selected.value = lang;
-  open.value = false;
-};
-
-const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as Node;
-  if (dropdownRef.value && !dropdownRef.value.contains(target)) {
-    open.value = false;
-  }
-};
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside);
-});
 const handleEndChat = () => {
   if (props.currentConversationId !== null) {
     emit('endChat', props.currentConversationId);
@@ -112,49 +71,22 @@ const handleEndChat = () => {
       />
     </div>
 
-    <!-- Dropdown + Botón -->
-    <div class="flex items-center gap-0 h-full">
-      <!-- Dropdown -->
-      <div
-        ref="dropdownRef"
-        class="relative w-36 h-full max-h-12 transition-color active:opacity-80 duration-50"
-      >
-        <button
-          @click="toggleDropdown"
-          class="border-2 border-r-0 border-osur-dark relative w-full font-bold justify-center items-center flex h-full text-left bg-osur text-osur-dark dark:bg-osur-dark dark:text-osur rounded-l-lg cursor-pointer"
-        >
-          {{ selected || $t('chat.lang') }}
-        </button>
-
-        <ul
-          v-if="open"
-          class="absolute bottom-full mb-2 w-full bg-osur text-osur-dark dark:bg-osur-dark dark:text-osur rounded-xl shadow-lg max-h-60 overflow-y-auto z-10"
-        >
-          <li
-            v-for="lang in languages"
-            :key="lang"
-            @click="select(lang)"
-            class="px-4 py-2 cursor-pointer hover:bg-osur-hover dark:hover:bg-osur-dark-hover"
-          >
-            {{ lang }}
-          </li>
-        </ul>
-      </div>
-
+    <!-- Botones -->
+    <div class="flex items-center gap-2 h-full">
       <!-- Botón enviar -->
       <button
         @click="sendMessage"
-        class="border-2 border-l-0 border-osur transition-color active:opacity-80 duration-50 w-20 h-full max-h-12 px-3 rounded-r-lg font-bold tracking-wide cursor-pointer bg-osur-dark text-osur dark:bg-osur dark:text-osur-dark hover:opacity-70"
+        class="transition-color active:opacity-80 duration-50 h-full max-h-12 px-6 rounded-lg font-bold tracking-wide cursor-pointer bg-osur-dark text-osur dark:bg-osur dark:text-osur-dark hover:opacity-70"
       >
         {{ t('chat.send') }}
       </button>
 
       <button
-      @click="handleEndChat"
-      class="ml-2 px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
-    >
-      End Chat
-    </button>
+        @click="handleEndChat"
+        class="px-4 py-2 bg-osur-dark text-white rounded-lg hover:bg-osur-2-dark dark:bg-osur dark:text-black"
+      >
+        End Chat
+      </button>
     </div>
   </div>
 </template>
