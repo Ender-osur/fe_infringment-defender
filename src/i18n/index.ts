@@ -144,11 +144,11 @@ const messages = {
       title: 'Nuestros servicios',
       heroTitle: 'Asesoría legal impulsada por IA para conductores',
       heroDescription:
-        'Obtén información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
+        'Obtenga información legal rápida y confiable relacionada con las leyes e infracciones de tránsito.',
       list: [
         {
           title: 'Asistencia en ley de tránsito',
-          description: 'Chatea con un asistente legal impulsado por IA para obtener información legal rápida y confiable relacionada con leyes de tránsito y violaciones.',
+          description: 'Chatea con un asistente legal impulsado por IA para obtener información legal rápida y confiable relacionada con las leyes e infracciones de tránsito.',
           button: 'Obtener Asesoría',
           path: '/chat',
         },
