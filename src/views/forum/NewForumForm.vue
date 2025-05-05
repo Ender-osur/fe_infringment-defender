@@ -6,16 +6,16 @@ const emit = defineEmits(['forumCreated', 'cancel']);
 const { createForum } = useForum();
 
 const title = ref('');
-const comment = ref('');
+const description = ref('');
 
 const clearForm = () => {
   title.value = '';
-  comment.value = '';
+  description.value = '';
 };
 
 const submitForum = async () => {
   try {
-    await createForum(title.value, comment.value);
+    await createForum(title.value, description.value);
     clearForm();
     emit('forumCreated');
   } catch (err) {
@@ -40,11 +40,9 @@ const submitForum = async () => {
     </div>
 
     <div>
-      <label class="block font-semibold text-pt dark:text-pt-light">{{
-        $t('forum.comment')
-      }}</label>
+      <label class="block font-semibold text-pt dark:text-pt-light">{{ $t('forum.description') }}</label>
       <textarea
-        v-model="comment"
+        v-model="description"
         class="w-full px-3 py-2 border rounded dark:border-light border-dark"
         required
       ></textarea>

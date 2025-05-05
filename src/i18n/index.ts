@@ -17,7 +17,7 @@ const messages = {
       title: "Coversation List",
     },
     footer: {
-      rights: 'Developed by Osur.dev',
+      rights: 'Developed by Infringment Defender developers team',
     },
     services: {
       title: 'Our services',
@@ -44,8 +44,25 @@ const messages = {
     forum: {
       title: 'Title',
       comment: 'Commentary',
+      description: 'Description',
       noPosts: "There are no posts in the forum yet",
-      create: "Create question"
+      create: "Create question",
+      postedBy: "Posted by",
+      showComments: "Show comments",
+      hideComments: "Hide comments",
+      noComments: "No comments yet",
+      writeComment: "Write a comment...",
+      addComment: "Add comment",
+      sendingComment: "Sending...",
+      loginToComment: "Login to add a comment",
+      createPost: "Create new post",
+      createPostSubtitle: "Share your thoughts with the community",
+      category: "Category",
+      titlePlaceholder: "Enter a descriptive title",
+      descriptionPlaceholder: "Provide details about your post",
+      publish: "Publish",
+      publishing: "Publishing...",
+      categoryNote: "The category will be added as a prefix to the title"
     },
     form: {
       name: 'Name',
@@ -101,7 +118,7 @@ const messages = {
       title: "Lista de conversaciones",
     },
     footer: {
-      rights: 'Desarrollador por Osur.dev',
+      rights: 'Desarrollador por el equipo de desarrollo de Infringment Defender',
     },
     services: {
       title: 'Nuestros servicios',
@@ -126,8 +143,25 @@ const messages = {
     forum: {
       title: 'Título',
       comment: 'Comentario',
+      description: 'Descripción',
       noPosts: "No hay publicaciones en el foro todavía",
-      create: "Crear pregunta"
+      create: "Crear pregunta",
+      postedBy: "Publicado por",
+      showComments: "Mostrar comentarios",
+      hideComments: "Ocultar comentarios",
+      noComments: "No hay comentarios todavía",
+      writeComment: "Escribe un comentario...",
+      addComment: "Agregar comentario",
+      sendingComment: "Enviando...",
+      loginToComment: "Inicia sesión para comentar",
+      createPost: "Crear nueva publicación",
+      createPostSubtitle: "Comparte tus ideas con la comunidad",
+      category: "Categoría",
+      titlePlaceholder: "Ingresa un título descriptivo",
+      descriptionPlaceholder: "Proporciona detalles sobre tu publicación",
+      publish: "Publicar",
+      publishing: "Publicando...",
+      categoryNote: "La categoría se añadirá como prefijo al título"
     },
     form: {
       name: 'Nombre',
